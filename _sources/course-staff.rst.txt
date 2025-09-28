@@ -1,0 +1,17 @@
+Course Staff
+------------
+
+**Instructor**
+
+- `Lamont Samuels <https://lsamuels.github.io>`_
+
+**Teaching Assistants**
+
+- Daniel Sheeler 
+- Jiayue Chen
+
+**Graders**
+
+- Nandini Gandhi
+- Tao Xiong 
+- Max Plokita 
