@@ -15,9 +15,9 @@ In general, assignments are posted on Tuesday preceding their deadline.
     Week, Module, Assignment Out, Assignment Due  
     1, M1: Unix Shell, HW 1 , None  
     2, M1: Unix Shell, HW 2,  HW 1 
-    3, M2: Unix Processes & Management, HW 3 ,HW 2
-    4, M2: Unix Processes & Management, None,  HW 3
-    5, **Midterm Exam** M3: Interacting with the Unix Kernel, HW 4, None  
+    3, M2: Unix Processes & Management, None ,HW 2
+    4,  **Midterm Exam** and M2: Unix Processes & Management, HW3,  None
+    5, M3: Interacting with the Unix Kernel, HW 4, HW3   
     6, M3: Interacting with the Unix Kernel, Milestone 1, HW 4  
     7, M4: Unix File Systems,  None, None
     8, **Final Exam** and M5: Networking in Unix, Milestone 2, Milestone 1

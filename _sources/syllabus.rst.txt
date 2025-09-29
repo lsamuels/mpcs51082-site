@@ -63,8 +63,8 @@ There will be two exams in this course. The exams will be a mixture of coding ex
 +-----------------+--------------+-----------------------------------------------+
 | Exam            | Time Limit   | Date                                          |
 +=================+==============+===============================================+
-| Midterm Exam    | 120 minutes  | | **Monday Section: October 27th @ 10:30am**  |
-|                 |              | | **Thursday Section: October 30th @ 5:30pm** |                 
+| Midterm Exam    | 120 minutes  | | **Monday Section: October 20th @ 10:30am**  |
+|                 |              | | **Thursday Section: October 23rd @ 5:30pm** |                 
 +-----------------+--------------+-----------------------------------------------+
 | Final Exam      | 120 minutes  | | **Monday Section: November 17th @ 10:30am** |
 |                 |              | | **Thursday Section: November 20th @ 5:30pm**|                 
