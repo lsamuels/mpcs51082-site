@@ -477,8 +477,8 @@ Missing arguments:
 
 .. code-block:: bash
 
-   $ p5.sh data/orig_sched.csv 1 1 4
-   Usage: p5.sh SCHEDULE_FILE WARD SECTION MONTH DAY
+   $ p5.sh data/orig_sched.csv 1 1 
+   Usage: p5.sh SCHEDULE_FILE WARD SECTION MONTH 
    $ echo $?
    1
 
