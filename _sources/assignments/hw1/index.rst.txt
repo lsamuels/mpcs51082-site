@@ -462,7 +462,7 @@ Days found:
 
 .. code-block:: bash
 
-   $ p5.sh data/orig_sched.csv 1 1 4 5
+   $ p5.sh data/orig_sched.csv 1 1 4 
    4
    5
 
@@ -470,7 +470,7 @@ No days found:
 
 .. code-block:: bash
 
-   $ p5.sh data/orig_sched.csv 1 1 4 9
+   $ p5.sh data/orig_sched.csv 1 1 2 
    $ 
 
 Missing arguments:
