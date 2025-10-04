@@ -132,8 +132,8 @@ Key syntax
 
 - **Field delimiter**: ``-t','`` sets the column separator to a comma.
 - **Sort key**: ``-kSTART,END`` selects the field range to sort by.
-  - Most common: ``-k2,2`` → sort by *only* column 2.
-  - Add ``n`` to sort **numerically** (otherwise it's lexical): ``-k2,2n``.
+   - Most common: ``-k2,2`` → sort by *only* column 2.
+   - Add ``n`` to sort **numerically** (otherwise it's lexical): ``-k2,2n``.
 - **Multiple keys**: provide more than one ``-k`` in priority order.
   Example: ``-k2,2n -k3,3n -k5,5n`` sorts by col2, then col3, then col5.
 

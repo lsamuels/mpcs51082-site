@@ -272,9 +272,14 @@ For CSV-like data, pair it with <cite>-t’,’</cite> to tell <cite>sort</cite>
 <h3>Key syntax<a class="headerlink" href="#key-syntax" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Field delimiter</strong>: <code class="docutils literal notranslate"><span class="pre">-t','</span></code> sets the column separator to a comma.</p></li>
-<li><p><strong>Sort key</strong>: <code class="docutils literal notranslate"><span class="pre">-kSTART,END</span></code> selects the field range to sort by.
-- Most common: <code class="docutils literal notranslate"><span class="pre">-k2,2</span></code> → sort by <em>only</em> column 2.
-- Add <code class="docutils literal notranslate"><span class="pre">n</span></code> to sort <strong>numerically</strong> (otherwise it’s lexical): <code class="docutils literal notranslate"><span class="pre">-k2,2n</span></code>.</p></li>
+<li><dl class="simple">
+<dt><strong>Sort key</strong>: <code class="docutils literal notranslate"><span class="pre">-kSTART,END</span></code> selects the field range to sort by.</dt><dd><ul>
+<li><p>Most common: <code class="docutils literal notranslate"><span class="pre">-k2,2</span></code> → sort by <em>only</em> column 2.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">n</span></code> to sort <strong>numerically</strong> (otherwise it’s lexical): <code class="docutils literal notranslate"><span class="pre">-k2,2n</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p><strong>Multiple keys</strong>: provide more than one <code class="docutils literal notranslate"><span class="pre">-k</span></code> in priority order.
 Example: <code class="docutils literal notranslate"><span class="pre">-k2,2n</span> <span class="pre">-k3,3n</span> <span class="pre">-k5,5n</span></code> sorts by col2, then col3, then col5.</p></li>
 </ul>
