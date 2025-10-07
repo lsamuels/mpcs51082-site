@@ -355,7 +355,7 @@ Usage
 
 .. code-block:: bash
 
-  Usage: p4.sh [-z] SWEEP_FILE WARD SECTION
+  Usage: p4.sh [-z] SCHEDULE_FILE WARD SECTION
 
 - ``SCHEDULE_FILE``: path to the CSV (e.g., ``data/orig_sched.csv``)
 - ``WARD``: ward number (integer)
