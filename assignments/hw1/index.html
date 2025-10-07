@@ -143,6 +143,10 @@
 </li>
 </ul>
 </li>
+<li><a class="reference internal" href="#running-the-tests">Running the Tests</a><ul>
+<li><a class="reference internal" href="#run-a-single-test-problem-1">Run a single test (Problem 1)</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#grading">Grading</a></li>
 <li><a class="reference internal" href="#submission">Submission</a></li>
 </ul>
@@ -621,6 +625,39 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 </dd>
 </dl>
 </section>
+</section>
+</section>
+<section id="running-the-tests">
+<h2>Running the Tests<a class="headerlink" href="#running-the-tests" title="Link to this heading">¶</a></h2>
+<p>Inside your repository, there is a top-level <code class="docutils literal notranslate"><span class="pre">tests/</span></code>  directory that contains tests for each homework problem (separated into their own directories). Each test within a test problem directory consists of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">testXX.in</span></code> — one line with the exact command to run (paths are relative to the test folder).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">testXX.ans</span></code> — the expected output.</p></li>
+</ul>
+<p>the <strong>last line</strong> of <code class="docutils literal notranslate"><span class="pre">testXX.ans</span></code> is the <strong>expected exit status</strong>; all prior lines are the expected stdout.</p>
+<p>Each test directory has a runner file <code class="docutils literal notranslate"><span class="pre">run.sh</span></code> that compares both stdout and exit status. A mismatch in either causes the test to fail. To run all the tests for a specific problem can run <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run.sh</span></code> in that specific directory. For example, from the top-level directory of your repository, you can run the problem 1 tests by performing the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tests/p1
+$<span class="w"> </span>bash<span class="w"> </span>run.sh
+</pre></div>
+</div>
+<p>The runner will specify whether you passed a test case or if you failed it. Here’s a sample structure of what to expect to see after running the <code class="docutils literal notranslate"><span class="pre">run.sh</span></code> file.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>test01 passed
+test02 failed.
+       test02.in: bash ../../p1/p1.sh ../data/bad.csv
+       got: 1
+       expected: 2
+       exit status got: 1
+       exit status expected: 0
+Total: 1/2
+</pre></div>
+</div>
+<section id="run-a-single-test-problem-1">
+<h3>Run a single test (Problem 1)<a class="headerlink" href="#run-a-single-test-problem-1" title="Link to this heading">¶</a></h3>
+<p>Each runner supports a <code class="docutils literal notranslate"><span class="pre">-t</span></code> flag to target one test by label (without <code class="docutils literal notranslate"><span class="pre">.in</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tests/p1
+$<span class="w"> </span>bash<span class="w"> </span>run.sh<span class="w"> </span>-t<span class="w"> </span>test01
+</pre></div>
+</div>
 </section>
 </section>
 <section id="grading">

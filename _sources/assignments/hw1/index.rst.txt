@@ -517,7 +517,45 @@ The ``tr`` command reads from standard input and **translates**, **squeezes**, o
      echo "1,2,3" | tr -d ','
      # -> 123
 
-Grading
+Running the Tests
+=================
+Inside your repository, there is a top-level ``tests/``  directory that contains tests for each homework problem (separated into their own directories). Each test within a test problem directory consists of:
+
+- ``testXX.in`` — one line with the exact command to run (paths are relative to the test folder).
+- ``testXX.ans`` — the expected output.
+
+the **last line** of ``testXX.ans`` is the **expected exit status**; all prior lines are the expected stdout.  
+
+Each test directory has a runner file ``run.sh`` that compares both stdout and exit status. A mismatch in either causes the test to fail. To run all the tests for a specific problem can run ``bash run.sh`` in that specific directory. For example, from the top-level directory of your repository, you can run the problem 1 tests by performing the following: 
+
+.. code-block:: bash
+
+   $ cd tests/p1
+   $ bash run.sh
+
+The runner will specify whether you passed a test case or if you failed it. Here's a sample structure of what to expect to see after running the ``run.sh`` file. 
+
+.. code-block:: text
+
+   test01 passed
+   test02 failed.
+          test02.in: bash ../../p1/p1.sh ../data/bad.csv
+          got: 1
+          expected: 2
+          exit status got: 1
+          exit status expected: 0
+   Total: 1/2
+
+Run a single test (Problem 1)
+-----------------------------
+Each runner supports a ``-t`` flag to target one test by label (without ``.in``):
+
+.. code-block:: bash
+
+   $ cd tests/p1
+   $ bash run.sh -t test01
+
+Grading 
 =========
 Programming assignments will be graded according to a general rubric. Specifically, we will assign points for completeness, correctness, design, and style. (For more details on the categories, see our Assignment Rubric page.)
 
