@@ -26,7 +26,10 @@ Week 1 Videos
  
 Week 2 Videos 
 ~~~~~~~~~~~~~~
-TBD
+* 1.4 - Executing Commands and Arithmetic Expression 
+* 1.5 - Process Substitution, Globbing Syntax
+* 1.6 - Parameter Expansion 
+* 1.7 - Syntax Functions, Arrays, Dictionaries
 
 
 The slides presented in lecture and these videos are accessible on our Canvas Page. Click on the Files link and you then can download the m1.zip file.
