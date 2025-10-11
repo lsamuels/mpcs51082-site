@@ -71,4 +71,4 @@ Assignment
 Assignments are always **due** on Friday evenings. 
 
 * `Homework #1  <../../assignments/hw1/index.html>`__, due October 10th at 11:59pm CDT
-* `Homework #2 (Coming Soon)  <../../assignments/hw2/index.html>`__, due October 17th at 11:59pm CDT
+* `Homework #2  <../../assignments/hw2/index.html>`__, due October 17th at 11:59pm CDT

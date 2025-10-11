@@ -7,6 +7,7 @@ Homework
 =========
 
 - `Homework #1 <./hw1/index.html>`__, due October 10th at 11:59pm CDT
+- `Homework #2 <./hw2/index.html>`__, due October 17th at 11:59pm CDT
 
 
 Assignment Rubric 
