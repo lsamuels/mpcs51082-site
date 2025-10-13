@@ -66,6 +66,18 @@ Week 2
    - Finding files in the filesystem 
    - Advance Bash Syntax [as time permits]
 
+Week 3 
+~~~~~~~
+- Dates/Times
+   -  Section 1: **Monday October 13th 10:30am-12:20am** 
+   -  Section 2: **Thursday October 16th  05:30pm-7:30pm** 
+- Session Outline 
+   - Using regular expressions to find search/modify text in Unix 
+   - Midterm discussion 
+   - Shell Aliasing/History [as time permits]
+
+
+
 Assignment
 ----------------------
 Assignments are always **due** on Friday evenings. 
