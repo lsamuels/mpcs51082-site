@@ -389,9 +389,9 @@ A station is considered to serve a given line if the station's ``STATION_DESCRIP
 
 **Validation & errors:**
 
-- If ``$1`` is missing then print ``Error: missing required CTA stops file`` *to stderr* and a usage line, then ``exit 1``.
-- If ``$1`` does not exist then print ``"Error: $1 does not exist"`` *to stderr* and a usage line, then ``exit 1``.
-- If any line name in ``$2…`` is not in the allowed set, print  ``Error: invalid stop (<name>)`` to *stderr*, print usage, then ``exit 1``.
+- If ``$1`` is missing then print ``Error: missing required CTA stops file`` *to stderr* and a usage line *to stdout*, then ``exit 1``.
+- If ``$1`` does not exist then print ``"Error: $1 does not exist"`` *to stderr* and a usage line *to stdout*, then ``exit 1``.
+- If any line name in ``$2…`` is not in the allowed set, print  ``Error: invalid stop (<name>)`` to *stderr*, print usage *to stdout*, then ``exit 1``.
 - Required usage text (printed to stderr on error): ``Usage: p2.sh FILE [LINE] ...``
 
 **Output format:**
