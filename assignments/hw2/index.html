@@ -102,12 +102,18 @@
 <li><a class="reference internal" href="#problem-1c-count-files-per-extension-non-recursive">Problem 1c — Count files per extension (non-recursive)</a></li>
 <li><a class="reference internal" href="#problem-1d-alphabet-slice-by-numeric-range">Problem 1d — Alphabet slice by numeric range</a></li>
 <li><a class="reference internal" href="#problem-1e-first-available-numeric-slot-for-a-stem">Problem 1e — First available numeric slot for a stem</a></li>
+<li><a class="reference internal" href="#problem-1-testing-structure">Problem 1 Testing Structure</a></li>
+<li><a class="reference internal" href="#run-a-single-test-problem-1">Run a single test (Problem 1)</a></li>
 <li><a class="reference internal" href="#problem-2-build-per-line-station-lists-from-cta-stops">Problem 2 — Build per-line station lists from  CTA stops</a><ul>
 <li><a class="reference internal" href="#csv-schema-assumed">CSV schema (assumed)</a></li>
 <li><a class="reference internal" href="#input">Input</a></li>
 <li><a class="reference internal" href="#output">Output</a></li>
 <li><a class="reference internal" href="#examples">Examples:</a></li>
 <li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#problem-2-test-structure-how-to-run">Problem 2 — Test structure &amp; how to run</a><ul>
+<li><a class="reference internal" href="#runner">Runner</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#grading">Grading</a></li>
@@ -393,6 +399,29 @@ $ # (prints nothing)
 </pre></div>
 </div>
 </section>
+<section id="problem-1-testing-structure">
+<h3>Problem 1 Testing Structure<a class="headerlink" href="#problem-1-testing-structure" title="Link to this heading">¶</a></h3>
+<p>Inside your repository, there is a top-level <code class="docutils literal notranslate"><span class="pre">tests/</span></code>  directory that contains tests for each homework problem (separated into their own directories). For problem1, each subproblem is divided into its own directory based on its letter (e.g., <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, etc.).  Each test within a subdirectory consists of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">testXX.in</span></code> — one line with the exact command to run (paths are relative to the test folder).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">testXX.ans</span></code> — the expected output.</p></li>
+</ul>
+<p>the <strong>last line</strong> of <code class="docutils literal notranslate"><span class="pre">testXX.ans</span></code> is the <strong>expected exit status</strong>; all prior lines are the expected stdout.</p>
+<p>Each test directory has a runner file <code class="docutils literal notranslate"><span class="pre">run.sh</span></code> that compares both stdout and exit status. A mismatch in either causes the test to fail. To run all the tests for a specific problem can run <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run.sh</span></code> in that specific directory. For example, from the top-level directory of your repository, you can run the problem 1 tests by performing the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tests/p1/a
+$<span class="w"> </span>bash<span class="w"> </span>run.sh
+</pre></div>
+</div>
+<p>The  output will be similar to the test-cases provided in homework 1.</p>
+</section>
+<section id="run-a-single-test-problem-1">
+<h3>Run a single test (Problem 1)<a class="headerlink" href="#run-a-single-test-problem-1" title="Link to this heading">¶</a></h3>
+<p>Each runner supports a <code class="docutils literal notranslate"><span class="pre">-t</span></code> flag to target one test by label (without <code class="docutils literal notranslate"><span class="pre">.in</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tests/p1/a
+$<span class="w"> </span>bash<span class="w"> </span>run.sh<span class="w"> </span>-t<span class="w"> </span>test01
+</pre></div>
+</div>
+</section>
 <section id="problem-2-build-per-line-station-lists-from-cta-stops">
 <h3>Problem 2 — Build per-line station lists from  CTA stops<a class="headerlink" href="#problem-2-build-per-line-station-lists-from-cta-stops" title="Link to this heading">¶</a></h3>
 <p>Inside the <code class="docutils literal notranslate"><span class="pre">p2/p2.sh</span></code> file,  write a bash script that reads a single CTA “L” stops CSV and, for each requested train line, produces a file named <code class="docutils literal notranslate"><span class="pre">&lt;line&gt;.txt</span></code> containing the <strong>station names</strong> served by that line (one per line, sorted). Lines are specified on the command line and are <strong>case-insensitive</strong>.</p>
@@ -511,6 +540,56 @@ $ # Nothing is created
 <li><p>Some stations and stop IDs are listed multiple times in the CSV.</p></li>
 <li><p>Case handling: treat both the <strong>requested line names</strong> and the <strong>membership check</strong> as <strong>case-insensitive</strong>.</p></li>
 <li><p>No files are created when no lines are provided or when none of the requested lines are present in the input.</p></li>
+</ul>
+</section>
+</section>
+<section id="problem-2-test-structure-how-to-run">
+<h3>Problem 2 — Test structure &amp; how to run<a class="headerlink" href="#problem-2-test-structure-how-to-run" title="Link to this heading">¶</a></h3>
+<p>Each test lives in its own directory:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">test01/</span></code>, <code class="docutils literal notranslate"><span class="pre">test02/</span></code>, …</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cta.csv</span></code> — input CSV (with header)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">args.txt</span></code> — arguments passed to your script (everything after the script name)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expected/</span></code>
+- <code class="docutils literal notranslate"><span class="pre">&lt;line&gt;.txt</span></code> files — expected outputs for requested lines (e.g., <code class="docutils literal notranslate"><span class="pre">red.txt</span></code>)
+- <code class="docutils literal notranslate"><span class="pre">stdout.txt</span></code> — expected stdout (usually empty)
+- <code class="docutils literal notranslate"><span class="pre">status.txt</span></code> — expected exit code (<code class="docutils literal notranslate"><span class="pre">0</span></code> on success, <code class="docutils literal notranslate"><span class="pre">1</span></code> on error)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<section id="runner">
+<h4>Runner<a class="headerlink" href="#runner" title="Link to this heading">¶</a></h4>
+<p>You can run all the tests by going into the <code class="docutils literal notranslate"><span class="pre">tests/p2</span></code> directory and executing:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bash<span class="w"> </span>run.sh
+</pre></div>
+</div>
+<p>By default it runs your solution at <code class="docutils literal notranslate"><span class="pre">../../p2/p2.sh</span></code> (resolved to an absolute path).
+You can override with an absolute path:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">P2_SCRIPT</span><span class="o">=</span>/full/path/to/p2.sh<span class="w"> </span>bash<span class="w"> </span>run.sh
+</pre></div>
+</div>
+<p><strong>What it does:</strong></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Discovers <code class="docutils literal notranslate"><span class="pre">test*/</span></code> directories, runs each as:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">$P2_SCRIPT</span> <span class="pre">$(cat</span> <span class="pre">args.txt)</span> <span class="pre">&gt;</span> <span class="pre">got.stdout</span> <span class="pre">2&gt;</span> <span class="pre">got.stderr;</span> <span class="pre">echo</span> <span class="pre">$?</span> <span class="pre">&gt;</span> <span class="pre">got.status</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Compares:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">expected/stdout.txt</span></code> ↔ <code class="docutils literal notranslate"><span class="pre">got.stdout</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expected/status.txt</span></code> ↔ <code class="docutils literal notranslate"><span class="pre">got.status</span></code></p></li>
+<li><p>Every expected <code class="docutils literal notranslate"><span class="pre">*.txt</span></code> (except <code class="docutils literal notranslate"><span class="pre">stdout.txt</span></code>/<code class="docutils literal notranslate"><span class="pre">status.txt</span></code>) ↔ produced file of the same name</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Fails a test if an expected file is missing or if extra top-level <code class="docutils literal notranslate"><span class="pre">*.txt</span></code> files were produced.</p></li>
 </ul>
 </section>
 </section>
