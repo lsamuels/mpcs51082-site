@@ -31,6 +31,11 @@ Week 2 Videos
 * 1.6 - Parameter Expansion 
 * 1.7 - Syntax Functions, Arrays, Dictionaries
 
+Week 3 Videos 
+~~~~~~~~~~~~~~
+* 1.8 - Shell Aliasing & History
+* 1.9 - Shell Environment and Configuration
+* 1.10 - Shell Configuration Demo
 
 The slides presented in lecture and these videos are accessible on our Canvas Page. Click on the Files link and you then can download the m1.zip file.
 
