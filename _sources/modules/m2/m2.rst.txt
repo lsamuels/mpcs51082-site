@@ -26,6 +26,11 @@ Week 4 Videos
 * 2.1 - Job Control 
 * 2.2 - Process Groups and Sessions 
 
+Week 5 Video 
+~~~~~~~~~~~~`
+* 2.3 - Introduction to C Basics(Part 1)
+* 2.4 - Introduction to C Basics(Part 2)
+
 The slides presented in these videos are accessible in the upstream repository and on Canvas.
 
 Resources/Readings 
@@ -44,6 +49,11 @@ Week 4
 ~~~~~~~
 Midterm Exam (no in-person lecture)
 
+
+Week 5
+~~~~~~~
+- Signals 
+- Process Management [if time permit]
 
 Assignment
 ----------------------
