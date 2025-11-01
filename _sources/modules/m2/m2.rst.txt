@@ -27,9 +27,12 @@ Week 4 Videos
 * 2.2 - Process Groups and Sessions 
 
 Week 5 Video 
-~~~~~~~~~~~~`
-* 2.3 - Introduction to C Basics(Part 1)
-* 2.4 - Introduction to C Basics(Part 2)
+~~~~~~~~~~~~~
+`C Bootcamp Videos <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=0de23cde-9be3-4ef0-8a30-b387017d06c3>`_.
+*  C Basics(Part 1)
+*  C Basics(Part 2)
+*  C Basics(Part 3)
+*  C Basics(Part 4)
 
 The slides presented in these videos are accessible in the upstream repository and on Canvas.
 
@@ -60,3 +63,4 @@ Assignment
 Assignments are always **due** on Friday evenings. 
 
 * `Homework #3 <../../assignments/hw3/index.html>`__, due October 31st at 11:59pm CDT
+* `Homework #4 <../../assignments/hw4/index.html>`__, due November 7th at 11:59pm CDT
