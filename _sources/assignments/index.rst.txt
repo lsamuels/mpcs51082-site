@@ -11,6 +11,10 @@ Homework
 - `Homework #3 <./hw3/index.html>`__, due October 31st at 11:59pm CDT
 - `Homework #4 <./hw4/index.html>`__, due November 7th at 11:59pm CDT
 
+Project 
+=======
+- `Milestone #1 <./milestone1/index.html>`__, due December 1st at 11:59pm CDT
+
 
 Assignment Rubric 
 ===================

@@ -16,12 +16,15 @@ Pre-recorded Lectures
 ---------------------
 **Note: Professor Samuels will state on Ed when the prerecorded videos are ready to be viewed each week for a module.**
 
-The pre-recorded lectures are available here: `M3 Videos <h..>`_.
+The pre-recorded lectures are available here: `M3 Videos <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=d1b231ad-56b5-4ce3-9094-b38d00061802>`_.
 You can also find the videos under the "Panopto" tab on the MPCS 51082 canvas site.
 
 The lectures are a series of approx 15-20 minute videos. **Please come back here weekly as the videos will be updated if a module spans multiple weeks.** This module includes the following videos: 
 
+- 3.1 - Process Control 
 
+C Bootcamp 
+-
 
 The slides presented in these videos are accessible in the upstream repository.
 
@@ -47,9 +50,21 @@ Week 6
    - System calls process
    - Process Creation and Termination in C 
 
+Week 7 
+~~~~~~~
+- Dates/Times
+   -  Section 1: **Monday November 10th 10:30am-12:20am** 
+   -  Section 2: **Thursday November 13th 5:30pm-7:30pm** 
+
+- Session Outline 
+   - Discuss Final Exam 
+   - Discuss Milestone #1
+   - Introductions to Signals in C 
+
 
 Assignment
 ----------------------
 Assignments are always **due** on Friday evenings. 
 
 * `Homework #4 <../../assignments/hw4/index.html>`__, due November 7th at 11:59pm CDT
+* `Milestone #1 <../../assignments/milestone1/index.html>`__, due December 1st at 11:59pm CDT
