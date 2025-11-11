@@ -109,7 +109,8 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#multiple-jobs">Multiple Jobs</a></li>
-<li><a class="reference internal" href="#background-jobs">Background Jobs</a><ul>
+<li><a class="reference internal" href="#background-jobs">Background Jobs</a></li>
+<li><a class="reference internal" href="#exit-shell-function"><code class="docutils literal notranslate"><span class="pre">exit_shell</span></code> function</a><ul>
 <li><a class="reference internal" href="#task-2-job-module-job-h-and-job-c">Task 2: Job Module (<code class="docutils literal notranslate"><span class="pre">job.h</span></code> and <code class="docutils literal notranslate"><span class="pre">job.c</span></code>)</a></li>
 <li><a class="reference internal" href="#task-3-the-executable-program-msh-c">Task 3: The Executable Program (<code class="docutils literal notranslate"><span class="pre">msh.c</span></code>)</a><ul>
 <li><a class="reference internal" href="#getline"><code class="docutils literal notranslate"><span class="pre">getline()</span></code></a></li>
@@ -391,7 +392,10 @@ Inside your <code class="docutils literal notranslate"><span class="pre">shell.h
 <section id="background-jobs">
 <h2>Background Jobs<a class="headerlink" href="#background-jobs" title="Link to this heading">¶</a></h2>
 <p>We will implement Background jobs in Milestone 2.</p>
-<p>Place the implementation of this function inside <code class="docutils literal notranslate"><span class="pre">src/shell.c</span></code>.</p>
+<p>Place the implementation of <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> inside <code class="docutils literal notranslate"><span class="pre">src/shell.c</span></code>.</p>
+</section>
+<section id="exit-shell-function">
+<h2><code class="docutils literal notranslate"><span class="pre">exit_shell</span></code> function<a class="headerlink" href="#exit-shell-function" title="Link to this heading">¶</a></h2>
 <p>Inside your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>, copy the following function prototype:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
 <span class="cm">* exit_shell - Closes down the shell by deallocating the shell state.</span>

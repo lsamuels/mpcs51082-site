@@ -309,11 +309,12 @@ Background Jobs
 We will implement Background jobs in Milestone 2. 
 
 
-Place the implementation of this function inside ``src/shell.c``. 
+Place the implementation of ``evaluate`` inside ``src/shell.c``. 
 
 
 ``exit_shell`` function 
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
+
 Inside your ``shell.h``, copy the following function prototype: 
 
 .. code-block:: c 
