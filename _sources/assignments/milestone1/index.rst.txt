@@ -2,7 +2,7 @@
 Milestone #1
 ==========================================
 
-**Due: Monday,  Mondaty December 1st at 11:59pm**
+**Due: Monday, Tuesday December 2nd at 11:59pm**
 
 In this assignment, we will begin implementing the course project: a shell program. This assignment focuses on understanding the repository structure and getting the initial parsing of the shell commands correct.  
 
@@ -97,47 +97,7 @@ The repository structure is similar to most small C projects in industry. The co
 
 As we move along, we will be adding more files and data to the repository each milestone.
 
-Task 1: Job Module (``job.h`` and ``job.c``) 
-=============================================
-The job module will contain information about the current jobs (i.e., foreground and/or background jobs) in existence. Unlike in the prior ``shell`` module, we want you to decide what should go inside this module and how to incorporate it into the ``shell`` module.
-The implementation must be defined in a file ``src/job.c`` and its header in ``include/job.h``. The header **must** contain the following definitions where you can add new fields but cannot delete or rename these types: 
 
-.. code-block:: C 
-
-  #ifndef _JOB_H_
-  #define _JOB_H_ 
-
-  #include <sys/types.h>
-
-  typedef enum job_state{FOREGROUND, BACKGROUND, SUSPENDED, UNDEFINED} job_state_t; 
-
-  // Represents a job in a shell. 
-  typedef struct job {
-      char *cmd_line;     // The command line for this specific job. 
-      job_state_t state;  // The current state for this job 
-      pid_t pid;          // The process id for this job 
-      int jid;            // The job number for this job 
-  }job_t;
-
-  #endif 
-
-The ``enum job_state`` is an enumeration type that allows you to assign the ``job_state_t`` field to one of those defined constants. It provides better code readability. For example, 
-
-.. code-block:: C 
-
-  job_t job; 
-  job_state_t state = FOREGROUND; 
-  job.state = state; 
-
-To help you get started thinking about how to design and incorporate this module into the shell module, we recommend the following: 
-
-1. Inside the ``msh_t`` typedef in the ``shell.h`` include a new field ``job_t *jobs`` to represent an array jobs that are running in the shell. 
-2. When allocating the ``job_t *jobs``, we recommend you allocate it to the size of ``max_jobs`` (i.e., the parameter from ``alloc_shell``). You may not use every element in the array; however, it will make it easier to add,delete, and modify jobs in the array. 
-3. Define a ``bool add_job(job_t *jobs, int max_jobs, pid_t pid, job_state_t state, const char *cmd_line)`` function that adds a new job to the array. Reminder if there are no more jobs left to allocate (i.e., ``max_jobs`` has been reached) then this function should return a false; otherwise, true to indicate the job was added. 
-4. Define a  ``bool delete_job(job_t *jobs, pid_t pid)`` function to remove a job from the array of jobs based on the ``pid_t`` provided. You should think about the return value for this function.  
-5. Define a ``void free_jobs(job_t *jobs, int max_jobs)`` function to deallocate the jobs array. 
-
-The above suggestions are **not required** and you are free to design the library as you wish as long as it has at least the above skeleton code. You can make modifications to the headers defined above, add new functions, etc. However, for each function prototype in the ``job.h`` file, you must provide documentation for that function.
 
 Task 2: Shell Module (``shell.h`` and ``shell.c``) 
 ====================================================
@@ -292,6 +252,7 @@ Place the implementation of this function inside ``src/shell.c``.
 
 ``evaluate`` function 
 -----------------------
+***Before implementing ``evaluate``, implement the job module, which is explained in **Task 2: Job Module (``job.h`` and ``job.c``)**. After implementing Task 2,  come back to implement the remainder of the shell module. 
 Inside your ``shell.h``, copy the following function prototype: 
 
 .. code-block:: c 
@@ -345,14 +306,7 @@ then this must cause the ``evaluate`` function to run the jobs sequentially afte
 
 Background Jobs 
 ~~~~~~~~~~~~~~~~
-Background jobs are asynchronous in nature and should be launched and executed in a child process and not waited on by the parent process. This means that the parent process should not ``wait`` on background job to terminate but rather continue on executing the next job. However, before the ``evaluate`` function returns it **must** check to see if any background jobs have completed and delete them from the jobs array. You can do this by calling ``waitpd`` in the following way 
-
-.. code-block:: console 
-
-  pid_t term_pid = waitpid (child_pid, &child_status, WNOHANG);
-
-
-where ``child_pid`` is the pid of the child process assigned to a background job. The ``WNOHANG`` allows the parent to not block if the background child process has not completed yet. As a reminder, ``waitpid`` will return the pid of the terminated child process.  **Please note: this is a naive implementation and we will update this mechanism in the next assignment using signals.** Additionally, You need to make sure you are waiting for background jobs to complete **BEFORE** the shell exits. We are only doing this for this specific assignment to check you implemented background jobs correctly. We will remove this requirement in the last assignment.  
+We will implement Background jobs in Milestone 2. 
 
 
 Place the implementation of this function inside ``src/shell.c``. 
@@ -376,6 +330,51 @@ This function simply deallocates any memory allocated within the shell state. Fo
 
 Place the implementation of this function inside ``src/shell.c``. 
 
+
+Task 2: Job Module (``job.h`` and ``job.c``) 
+=============================================
+The job module will contain information about the current jobs (i.e., foreground and/or background jobs) in existence. You are free to implement this module as you wish; we provide some helpful tips. 
+
+The implementation must be defined in a file ``src/job.c`` and its header in ``include/job.h``. The header **must** contain the following definitions where you can add new fields but cannot delete or rename these types: 
+
+.. code-block:: C 
+
+  #ifndef _JOB_H_
+  #define _JOB_H_ 
+
+  #include <sys/types.h>
+
+  typedef enum job_state{FOREGROUND, BACKGROUND, SUSPENDED, UNDEFINED} job_state_t; 
+
+  // Represents a job in a shell. 
+  typedef struct job {
+      char *cmd_line;     // The command line for this specific job. 
+      job_state_t state;  // The current state for this job 
+      pid_t pid;          // The process id for this job 
+      int jid;            // The job number for this job 
+  }job_t;
+
+  #endif 
+
+The ``enum job_state`` is an enumeration type that allows you to assign the ``job_state_t`` field to one of those defined constants. It provides better code readability. For example, 
+
+.. code-block:: C 
+
+  job_t job; 
+  job_state_t state = FOREGROUND; 
+  job.state = state; 
+
+To help you get started thinking about how to design and incorporate this module into the shell module, we recommend the following: 
+
+1. Inside the ``msh_t`` typedef in the ``shell.h`` include a new field ``job_t *jobs`` to represent an array jobs that are running in the shell. 
+2. When allocating the ``job_t *jobs``, we recommend you allocate it to the size of ``max_jobs`` (i.e., the parameter from ``alloc_shell``). You may not use every element in the array; however, it will make it easier to add,delete, and modify jobs in the array. After creating the jobs array, you should intialize every element to a value such that you know that element is an empty location in the job. For example, assign every ``cmd_line`` field for each element in the array to ``NULL``. This way, when trying to add a new job to the array you know that location in the array is empty. When you remove a job from the array, make sure you that at the end you make ``cmd_line = NULL``for that specific element.   
+3. Define a ``bool add_job(job_t *jobs, int max_jobs, pid_t pid, job_state_t state, const char *cmd_line)`` function that adds a new job to the array. Reminder if there are no more jobs left to allocate (i.e., ``max_jobs`` has been reached) then this function should return a false; otherwise, true to indicate the job was added. 
+4. Define a  ``bool delete_job(job_t *jobs, pid_t pid)`` function to remove a job from the array of jobs based on the ``pid_t`` provided. You should think about the return value for this function. Make sure to reset the location in the array where the job was deleted. As I mentioned earlier this could be setting ``cmd_line=NULL`` at that location. 
+5. Define a ``void free_jobs(job_t *jobs, int max_jobs)`` function to deallocate the jobs array. 
+
+The above suggestions are **not required** and you are free to design the library as you wish as long as it has at least the above skeleton code. You can make modifications to the headers defined above, add new functions, etc. However, for each function prototype in the ``job.h`` file, you must provide documentation for that function.
+
+
 Task 3: The Executable Program (``msh.c``) 
 ============================================
 
@@ -386,8 +385,8 @@ Inside the ``src/msh.c``, you will implement a ``main`` function along with any 
 
 1. Handle the following **optional** command line arguments: ``-s NUMBER``, ``-j NUMBER``, ``-l NUMBER``. The ``-s NUMBER`` represents the maximum number of command lines to store in the shell history. ``-j NUMBER`` represents the maximum number of jobs that can be in existence at any point in time and ``-l NUMBER`` represents the maximum number of characters that can be entered in for a single command line. These can be entered in any order and you must ensure that ``NUMBER`` is a positive integer (i.e., an integer greater than zero). **Please note we are not implementing the functionality of -j and -s in this assignment but will in future assignments**. However, you still need to  handle these arguments in this assignment. I recommend looking at `getopt() <https://www.geeksforgeeks.org/getopt-function-in-c-to-parse-command-line-arguments/>`__ to make it easy to process the options and ``sscanf`` to easily determine if the ``NUMBER`` is an actual number. If any additional command line arguments are specified or an **optional** command line argument is not correctly formatted then the program must ``return 1`` and print the usage state: ``usage: msh [-s NUMBER] [-j NUMBER] [-l NUMBER]``. **Do not print anything else out**. 
 2. Allocate and initialize a ``msh_t`` state (i.e., call ``allocate_shell``). If the user did not supply a optional command line argument then a ``0`` is passed in for that specific limit parameter (i.e., the shell will use the default value for that specific limit). This is the global variable mentioned in the previous section ``msh_t *shell``. This means you will need to ``include "shell.h"`` to get access to this variable in order to allocate and initialize the variable. 
-3. Using the allocated ``msh_t`` state, implement the *REPL* mechanism where it will prompt the user to enter in a command line, call the ``evaluate`` function of the shell module to execute the command. The program will continuously allow the user to enter in command lines until they enter ``exit``, which should close down the shell and exit. 
-4. Ensure ``msh`` works with redirecting standard-in and standard-out to files. 
+3. Using the allocated ``msh_t`` state, implement the *REPL* mechanism where it will prompt the user to enter in a command line, call the ``evaluate`` function of the shell module to execute the command. The program will continuously allow the user to enter in command lines until they enter ``exit``, which should close down the shell and exit.  
+4. If std-in closes then close down the shell and exit. We will explain how to check if stdin closes in the next section.  
 
 ``getline()``
 -----------
@@ -406,7 +405,11 @@ If ``*lineptr`` is set to ``NULL`` before the call, then ``getline()`` will allo
       long int len = 0;
       long nRead = getline(&line, &len, stdin);
       while ( nRead != -1) {
-          printf("Retrieved line of length %zd with contents:%s\n", nRead, line);
+          printf("Retrieved line of length %zd with contents:%s\n", nRead, line); //Remove this printf in your shell. It it only here for demonstration purposes. 
+          //The getline function keeps the \n at the end so we remove by assigning the null character at that location. 
+           if (line[nRead - 1] == '\n'){ 
+            line[nRead - 1] = '\0';
+          }
           // Done using line so I must free it!!
           free(line);
           //Make sure to reset line back to null for the next line
@@ -416,7 +419,7 @@ If ``*lineptr`` is set to ``NULL`` before the call, then ``getline()`` will allo
       return 0;
   }
 
-For the purposes of this assignment, we can grab the entire contents being read in from standard input using ``getline`` within a while loop. ``getline`` will return -1 once it has reached the end of the stream. Otherwise, 
+For the purposes of this assignment, we can grab the entire contents being read in from standard input using ``getline`` within a while loop. ``getline`` will return ``-1`` once it has reached the end of the stream (i.e., std-in has closed). Otherwise, 
 it returns the number of characters on the line (``nRead``). Notice that line is always set to ``NULL`` before we call ``getline``. This is a requirement for this assignment so we can allocate a new string for each line from the stream. Make sure to always free 
 the line after you are done using it. Also notice that when calling ``getline`` we pass in ``&line`` and ``&len``. This is required to make sure it can successfully place in the contents. Note that ``len`` is not the number of characters on the line but rather it is the length of an internal buffer to hold the characters. 
 You can ignore that value for this assignment; however, you still need to pass it in to call ``getline``. Make sure to include ``#define _GNU_SOURCE`` because it is required to use ``getline``.
@@ -464,7 +467,6 @@ Here are few sample runs of the ``msh`` shell at this point in its development. 
   argc=1
   msh> exit 
 
-As a reminder, ``evaluate`` only prints the command line arguments for a ``msh`` line. In the next assignment, we will start running the actual command lines. 
 
 Task 3: ``build.sh`` 
 ~~~~~~~~~~~~~~~~~~~~~
@@ -511,19 +513,9 @@ The exact weights for each category will vary from one assignment to another. Fo
 Submission
 ~~~~~~~~~~~~
 
-Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Milestone #1" assignment page via two ways, 
-
-1. **Uploading from Github directly (recommended way)**: You can link your Github account to your Gradescope account and upload the correct repository based on 
-   the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
+Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Milestone #1" assignment page by linking your Github account to your Gradescope account and upload the correct repository based on the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
   
-2. **Uploading via a Zip file**: You can also upload a zip file of the homework directory. Please make sure you upload the entire directory and keep the initial structure the **same** as the starter code; otherwise, you run the risk of not passing the automated tests. 
-
-.. note::
-   For either option, you must upload the entire directory structure; otherwise, your automated test grade will not run correctly and you will 
-   be **penalized** if we have to manually run the tests. Going with the first option will do this automatically for you. You can always add additional directories and files (and even files/directories inside the stater directories) but the default directory/file structure must not change. 
-
-
-Depending on the assignment, once you submit your work, an "autograder" will run. This autograder should produce the same test results as when you run the code yourself; if it doesn’t, please let us know so we can look into it. A few other notes: 
+Depending on the assignment, once you submit your work, an "autograder" will run. This autograder should produce the same test results as when you run the code yourself; if it doesn't, please let us know so we can look into it. A few other notes: 
 
 - You are allowed to make as many submissions as you want before the deadline.
 - Please make sure you have read and understood our :ref:`Late Submission Policy <late_submissions>`. 

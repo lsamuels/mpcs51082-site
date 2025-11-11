@@ -99,7 +99,6 @@
 <li><a class="reference internal" href="#task-0-understanding-the-repository-structure">Task 0: Understanding the Repository Structure</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#task-1-job-module-job-h-and-job-c">Task 1: Job Module (<code class="docutils literal notranslate"><span class="pre">job.h</span></code> and <code class="docutils literal notranslate"><span class="pre">job.c</span></code>)</a></li>
 <li><a class="reference internal" href="#task-2-shell-module-shell-h-and-shell-c">Task 2: Shell Module (<code class="docutils literal notranslate"><span class="pre">shell.h</span></code> and <code class="docutils literal notranslate"><span class="pre">shell.c</span></code>)</a><ul>
 <li><a class="reference internal" href="#alloc-shell-function"><code class="docutils literal notranslate"><span class="pre">alloc_shell</span></code> function</a></li>
 <li><a class="reference internal" href="#parse-tok-function"><code class="docutils literal notranslate"><span class="pre">parse_tok</span></code> function</a></li>
@@ -111,6 +110,7 @@
 </li>
 <li><a class="reference internal" href="#multiple-jobs">Multiple Jobs</a></li>
 <li><a class="reference internal" href="#background-jobs">Background Jobs</a><ul>
+<li><a class="reference internal" href="#task-2-job-module-job-h-and-job-c">Task 2: Job Module (<code class="docutils literal notranslate"><span class="pre">job.h</span></code> and <code class="docutils literal notranslate"><span class="pre">job.c</span></code>)</a></li>
 <li><a class="reference internal" href="#task-3-the-executable-program-msh-c">Task 3: The Executable Program (<code class="docutils literal notranslate"><span class="pre">msh.c</span></code>)</a><ul>
 <li><a class="reference internal" href="#getline"><code class="docutils literal notranslate"><span class="pre">getline()</span></code></a></li>
 </ul>
@@ -137,7 +137,7 @@
       
   <section id="milestone-1">
 <h1>Milestone #1<a class="headerlink" href="#milestone-1" title="Link to this heading">¶</a></h1>
-<p><strong>Due: Monday,  Mondaty December 1st at 11:59pm</strong></p>
+<p><strong>Due: Monday, Tuesday December 2nd at 11:59pm</strong></p>
 <p>In this assignment, we will begin implementing the course project: a shell program. This assignment focuses on understanding the repository structure and getting the initial parsing of the shell commands correct.</p>
 <section id="cs-linux-machine">
 <h2>CS Linux Machine<a class="headerlink" href="#cs-linux-machine" title="Link to this heading">¶</a></h2>
@@ -219,44 +219,6 @@ Although we are allowing for resubmissions, we recommend that you make progress 
 9. <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory - contains the testcases for testing the various modules created for the shell.</p>
 <p>As we move along, we will be adding more files and data to the repository each milestone.</p>
 </section>
-</section>
-<section id="task-1-job-module-job-h-and-job-c">
-<h3>Task 1: Job Module (<code class="docutils literal notranslate"><span class="pre">job.h</span></code> and <code class="docutils literal notranslate"><span class="pre">job.c</span></code>)<a class="headerlink" href="#task-1-job-module-job-h-and-job-c" title="Link to this heading">¶</a></h3>
-<p>The job module will contain information about the current jobs (i.e., foreground and/or background jobs) in existence. Unlike in the prior <code class="docutils literal notranslate"><span class="pre">shell</span></code> module, we want you to decide what should go inside this module and how to incorporate it into the <code class="docutils literal notranslate"><span class="pre">shell</span></code> module.
-The implementation must be defined in a file <code class="docutils literal notranslate"><span class="pre">src/job.c</span></code> and its header in <code class="docutils literal notranslate"><span class="pre">include/job.h</span></code>. The header <strong>must</strong> contain the following definitions where you can add new fields but cannot delete or rename these types:</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef _JOB_H_</span>
-<span class="cp">#define _JOB_H_</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
-
-<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">job_state</span><span class="p">{</span><span class="n">FOREGROUND</span><span class="p">,</span><span class="w"> </span><span class="n">BACKGROUND</span><span class="p">,</span><span class="w"> </span><span class="n">SUSPENDED</span><span class="p">,</span><span class="w"> </span><span class="n">UNDEFINED</span><span class="p">}</span><span class="w"> </span><span class="n">job_state_t</span><span class="p">;</span>
-
-<span class="c1">// Represents a job in a shell.</span>
-<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">job</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cmd_line</span><span class="p">;</span><span class="w">     </span><span class="c1">// The command line for this specific job.</span>
-<span class="w">    </span><span class="n">job_state_t</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w">  </span><span class="c1">// The current state for this job</span>
-<span class="w">    </span><span class="kt">pid_t</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span><span class="w">          </span><span class="c1">// The process id for this job</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">jid</span><span class="p">;</span><span class="w">            </span><span class="c1">// The job number for this job</span>
-<span class="p">}</span><span class="n">job_t</span><span class="p">;</span>
-
-<span class="cp">#endif</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">enum</span> <span class="pre">job_state</span></code> is an enumeration type that allows you to assign the <code class="docutils literal notranslate"><span class="pre">job_state_t</span></code> field to one of those defined constants. It provides better code readability. For example,</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">job_t</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
-<span class="n">job_state_t</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FOREGROUND</span><span class="p">;</span>
-<span class="n">job</span><span class="p">.</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>To help you get started thinking about how to design and incorporate this module into the shell module, we recommend the following:</p>
-<ol class="arabic simple">
-<li><p>Inside the <code class="docutils literal notranslate"><span class="pre">msh_t</span></code> typedef in the <code class="docutils literal notranslate"><span class="pre">shell.h</span></code> include a new field <code class="docutils literal notranslate"><span class="pre">job_t</span> <span class="pre">*jobs</span></code> to represent an array jobs that are running in the shell.</p></li>
-<li><p>When allocating the <code class="docutils literal notranslate"><span class="pre">job_t</span> <span class="pre">*jobs</span></code>, we recommend you allocate it to the size of <code class="docutils literal notranslate"><span class="pre">max_jobs</span></code> (i.e., the parameter from <code class="docutils literal notranslate"><span class="pre">alloc_shell</span></code>). You may not use every element in the array; however, it will make it easier to add,delete, and modify jobs in the array.</p></li>
-<li><p>Define a <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">add_job(job_t</span> <span class="pre">*jobs,</span> <span class="pre">int</span> <span class="pre">max_jobs,</span> <span class="pre">pid_t</span> <span class="pre">pid,</span> <span class="pre">job_state_t</span> <span class="pre">state,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*cmd_line)</span></code> function that adds a new job to the array. Reminder if there are no more jobs left to allocate (i.e., <code class="docutils literal notranslate"><span class="pre">max_jobs</span></code> has been reached) then this function should return a false; otherwise, true to indicate the job was added.</p></li>
-<li><p>Define a  <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">delete_job(job_t</span> <span class="pre">*jobs,</span> <span class="pre">pid_t</span> <span class="pre">pid)</span></code> function to remove a job from the array of jobs based on the <code class="docutils literal notranslate"><span class="pre">pid_t</span></code> provided. You should think about the return value for this function.</p></li>
-<li><p>Define a <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">free_jobs(job_t</span> <span class="pre">*jobs,</span> <span class="pre">int</span> <span class="pre">max_jobs)</span></code> function to deallocate the jobs array.</p></li>
-</ol>
-<p>The above suggestions are <strong>not required</strong> and you are free to design the library as you wish as long as it has at least the above skeleton code. You can make modifications to the headers defined above, add new functions, etc. However, for each function prototype in the <code class="docutils literal notranslate"><span class="pre">job.h</span></code> file, you must provide documentation for that function.</p>
 </section>
 <section id="task-2-shell-module-shell-h-and-shell-c">
 <h3>Task 2: Shell Module (<code class="docutils literal notranslate"><span class="pre">shell.h</span></code> and <code class="docutils literal notranslate"><span class="pre">shell.c</span></code>)<a class="headerlink" href="#task-2-shell-module-shell-h-and-shell-c" title="Link to this heading">¶</a></h3>
@@ -380,7 +342,8 @@ It places the number of arguments it found (including the program name) at the a
 </section>
 <section id="evaluate-function">
 <h4><code class="docutils literal notranslate"><span class="pre">evaluate</span></code> function<a class="headerlink" href="#evaluate-function" title="Link to this heading">¶</a></h4>
-<p>Inside your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>, copy the following function prototype:</p>
+<p><strong>*Before implementing ``evaluate``, implement the job module, which is explained in **Task 2: Job Module (``job.h`` and ``job.c``)</strong>. After implementing Task 2,  come back to implement the remainder of the shell module.
+Inside your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>, copy the following function prototype:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
 <span class="cm">* evaluate - executes the provided command line string</span>
 <span class="cm">*</span>
@@ -427,11 +390,7 @@ It places the number of arguments it found (including the program name) at the a
 </section>
 <section id="background-jobs">
 <h2>Background Jobs<a class="headerlink" href="#background-jobs" title="Link to this heading">¶</a></h2>
-<p>Background jobs are asynchronous in nature and should be launched and executed in a child process and not waited on by the parent process. This means that the parent process should not <code class="docutils literal notranslate"><span class="pre">wait</span></code> on background job to terminate but rather continue on executing the next job. However, before the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> function returns it <strong>must</strong> check to see if any background jobs have completed and delete them from the jobs array. You can do this by calling <code class="docutils literal notranslate"><span class="pre">waitpd</span></code> in the following way</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pid_t term_pid = waitpid (child_pid, &amp;child_status, WNOHANG);</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">child_pid</span></code> is the pid of the child process assigned to a background job. The <code class="docutils literal notranslate"><span class="pre">WNOHANG</span></code> allows the parent to not block if the background child process has not completed yet. As a reminder, <code class="docutils literal notranslate"><span class="pre">waitpid</span></code> will return the pid of the terminated child process.  <strong>Please note: this is a naive implementation and we will update this mechanism in the next assignment using signals.</strong> Additionally, You need to make sure you are waiting for background jobs to complete <strong>BEFORE</strong> the shell exits. We are only doing this for this specific assignment to check you implemented background jobs correctly. We will remove this requirement in the last assignment.</p>
+<p>We will implement Background jobs in Milestone 2.</p>
 <p>Place the implementation of this function inside <code class="docutils literal notranslate"><span class="pre">src/shell.c</span></code>.</p>
 <p>Inside your <code class="docutils literal notranslate"><span class="pre">shell.h</span></code>, copy the following function prototype:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
@@ -445,6 +404,44 @@ It places the number of arguments it found (including the program name) at the a
 </div>
 <p>This function simply deallocates any memory allocated within the shell state. For now, make sure to <code class="docutils literal notranslate"><span class="pre">free</span></code> any state data allocated you called with <code class="docutils literal notranslate"><span class="pre">malloc</span></code> and make sure to free the <code class="docutils literal notranslate"><span class="pre">shell</span></code> variable. For this assignment, you may have not allocated any memory other than the <code class="docutils literal notranslate"><span class="pre">shell</span></code> variable itself, which is fine.</p>
 <p>Place the implementation of this function inside <code class="docutils literal notranslate"><span class="pre">src/shell.c</span></code>.</p>
+<section id="task-2-job-module-job-h-and-job-c">
+<h3>Task 2: Job Module (<code class="docutils literal notranslate"><span class="pre">job.h</span></code> and <code class="docutils literal notranslate"><span class="pre">job.c</span></code>)<a class="headerlink" href="#task-2-job-module-job-h-and-job-c" title="Link to this heading">¶</a></h3>
+<p>The job module will contain information about the current jobs (i.e., foreground and/or background jobs) in existence. You are free to implement this module as you wish; we provide some helpful tips.</p>
+<p>The implementation must be defined in a file <code class="docutils literal notranslate"><span class="pre">src/job.c</span></code> and its header in <code class="docutils literal notranslate"><span class="pre">include/job.h</span></code>. The header <strong>must</strong> contain the following definitions where you can add new fields but cannot delete or rename these types:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef _JOB_H_</span>
+<span class="cp">#define _JOB_H_</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">job_state</span><span class="p">{</span><span class="n">FOREGROUND</span><span class="p">,</span><span class="w"> </span><span class="n">BACKGROUND</span><span class="p">,</span><span class="w"> </span><span class="n">SUSPENDED</span><span class="p">,</span><span class="w"> </span><span class="n">UNDEFINED</span><span class="p">}</span><span class="w"> </span><span class="n">job_state_t</span><span class="p">;</span>
+
+<span class="c1">// Represents a job in a shell.</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">job</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cmd_line</span><span class="p">;</span><span class="w">     </span><span class="c1">// The command line for this specific job.</span>
+<span class="w">    </span><span class="n">job_state_t</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w">  </span><span class="c1">// The current state for this job</span>
+<span class="w">    </span><span class="kt">pid_t</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span><span class="w">          </span><span class="c1">// The process id for this job</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">jid</span><span class="p">;</span><span class="w">            </span><span class="c1">// The job number for this job</span>
+<span class="p">}</span><span class="n">job_t</span><span class="p">;</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">enum</span> <span class="pre">job_state</span></code> is an enumeration type that allows you to assign the <code class="docutils literal notranslate"><span class="pre">job_state_t</span></code> field to one of those defined constants. It provides better code readability. For example,</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">job_t</span><span class="w"> </span><span class="n">job</span><span class="p">;</span>
+<span class="n">job_state_t</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FOREGROUND</span><span class="p">;</span>
+<span class="n">job</span><span class="p">.</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To help you get started thinking about how to design and incorporate this module into the shell module, we recommend the following:</p>
+<ol class="arabic simple">
+<li><p>Inside the <code class="docutils literal notranslate"><span class="pre">msh_t</span></code> typedef in the <code class="docutils literal notranslate"><span class="pre">shell.h</span></code> include a new field <code class="docutils literal notranslate"><span class="pre">job_t</span> <span class="pre">*jobs</span></code> to represent an array jobs that are running in the shell.</p></li>
+<li><p>When allocating the <code class="docutils literal notranslate"><span class="pre">job_t</span> <span class="pre">*jobs</span></code>, we recommend you allocate it to the size of <code class="docutils literal notranslate"><span class="pre">max_jobs</span></code> (i.e., the parameter from <code class="docutils literal notranslate"><span class="pre">alloc_shell</span></code>). You may not use every element in the array; however, it will make it easier to add,delete, and modify jobs in the array. After creating the jobs array, you should intialize every element to a value such that you know that element is an empty location in the job. For example, assign every <code class="docutils literal notranslate"><span class="pre">cmd_line</span></code> field for each element in the array to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. This way, when trying to add a new job to the array you know that location in the array is empty. When you remove a job from the array, make sure you that at the end you make <a href="#id1"><span class="problematic" id="id2">``</span></a>cmd_line = NULL``for that specific element.</p></li>
+<li><p>Define a <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">add_job(job_t</span> <span class="pre">*jobs,</span> <span class="pre">int</span> <span class="pre">max_jobs,</span> <span class="pre">pid_t</span> <span class="pre">pid,</span> <span class="pre">job_state_t</span> <span class="pre">state,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*cmd_line)</span></code> function that adds a new job to the array. Reminder if there are no more jobs left to allocate (i.e., <code class="docutils literal notranslate"><span class="pre">max_jobs</span></code> has been reached) then this function should return a false; otherwise, true to indicate the job was added.</p></li>
+<li><p>Define a  <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">delete_job(job_t</span> <span class="pre">*jobs,</span> <span class="pre">pid_t</span> <span class="pre">pid)</span></code> function to remove a job from the array of jobs based on the <code class="docutils literal notranslate"><span class="pre">pid_t</span></code> provided. You should think about the return value for this function. Make sure to reset the location in the array where the job was deleted. As I mentioned earlier this could be setting <code class="docutils literal notranslate"><span class="pre">cmd_line=NULL</span></code> at that location.</p></li>
+<li><p>Define a <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">free_jobs(job_t</span> <span class="pre">*jobs,</span> <span class="pre">int</span> <span class="pre">max_jobs)</span></code> function to deallocate the jobs array.</p></li>
+</ol>
+<p>The above suggestions are <strong>not required</strong> and you are free to design the library as you wish as long as it has at least the above skeleton code. You can make modifications to the headers defined above, add new functions, etc. However, for each function prototype in the <code class="docutils literal notranslate"><span class="pre">job.h</span></code> file, you must provide documentation for that function.</p>
+</section>
 <section id="task-3-the-executable-program-msh-c">
 <h3>Task 3: The Executable Program (<code class="docutils literal notranslate"><span class="pre">msh.c</span></code>)<a class="headerlink" href="#task-3-the-executable-program-msh-c" title="Link to this heading">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">msh</span></code> program will work similarly to <code class="docutils literal notranslate"><span class="pre">bash</span></code> command where it will act as a interactive <strong>REPL (Read-Eval-Print Loop)</strong>, where it will allow the user to enter in a command line (i.e., input), evaluate the command line, and print the result of running the command line back to the console console. The <code class="docutils literal notranslate"><span class="pre">msh</span></code> program
@@ -454,7 +451,7 @@ will continuously perform this REPL mechanism until the user enters <code class=
 <li><p>Handle the following <strong>optional</strong> command line arguments: <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">NUMBER</span></code>, <code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">NUMBER</span></code>, <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">NUMBER</span></code>. The <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">NUMBER</span></code> represents the maximum number of command lines to store in the shell history. <code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">NUMBER</span></code> represents the maximum number of jobs that can be in existence at any point in time and <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">NUMBER</span></code> represents the maximum number of characters that can be entered in for a single command line. These can be entered in any order and you must ensure that <code class="docutils literal notranslate"><span class="pre">NUMBER</span></code> is a positive integer (i.e., an integer greater than zero). <strong>Please note we are not implementing the functionality of -j and -s in this assignment but will in future assignments</strong>. However, you still need to  handle these arguments in this assignment. I recommend looking at <a class="reference external" href="https://www.geeksforgeeks.org/getopt-function-in-c-to-parse-command-line-arguments/">getopt()</a> to make it easy to process the options and <code class="docutils literal notranslate"><span class="pre">sscanf</span></code> to easily determine if the <code class="docutils literal notranslate"><span class="pre">NUMBER</span></code> is an actual number. If any additional command line arguments are specified or an <strong>optional</strong> command line argument is not correctly formatted then the program must <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">1</span></code> and print the usage state: <code class="docutils literal notranslate"><span class="pre">usage:</span> <span class="pre">msh</span> <span class="pre">[-s</span> <span class="pre">NUMBER]</span> <span class="pre">[-j</span> <span class="pre">NUMBER]</span> <span class="pre">[-l</span> <span class="pre">NUMBER]</span></code>. <strong>Do not print anything else out</strong>.</p></li>
 <li><p>Allocate and initialize a <code class="docutils literal notranslate"><span class="pre">msh_t</span></code> state (i.e., call <code class="docutils literal notranslate"><span class="pre">allocate_shell</span></code>). If the user did not supply a optional command line argument then a <code class="docutils literal notranslate"><span class="pre">0</span></code> is passed in for that specific limit parameter (i.e., the shell will use the default value for that specific limit). This is the global variable mentioned in the previous section <code class="docutils literal notranslate"><span class="pre">msh_t</span> <span class="pre">*shell</span></code>. This means you will need to <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">&quot;shell.h&quot;</span></code> to get access to this variable in order to allocate and initialize the variable.</p></li>
 <li><p>Using the allocated <code class="docutils literal notranslate"><span class="pre">msh_t</span></code> state, implement the <em>REPL</em> mechanism where it will prompt the user to enter in a command line, call the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> function of the shell module to execute the command. The program will continuously allow the user to enter in command lines until they enter <code class="docutils literal notranslate"><span class="pre">exit</span></code>, which should close down the shell and exit.</p></li>
-<li><p>Ensure <code class="docutils literal notranslate"><span class="pre">msh</span></code> works with redirecting standard-in and standard-out to files.</p></li>
+<li><p>If std-in closes then close down the shell and exit. We will explain how to check if stdin closes in the next section.</p></li>
 </ol>
 <section id="getline">
 <h4><code class="docutils literal notranslate"><span class="pre">getline()</span></code><a class="headerlink" href="#getline" title="Link to this heading">¶</a></h4>
@@ -470,7 +467,11 @@ If <code class="docutils literal notranslate"><span class="pre">*lineptr</span><
 <span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">nRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getline</span><span class="p">(</span><span class="o">&amp;</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">nRead</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Retrieved line of length %zd with contents:%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nRead</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Retrieved line of length %zd with contents:%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nRead</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">);</span><span class="w"> </span><span class="c1">//Remove this printf in your shell. It it only here for demonstration purposes.</span>
+<span class="w">        </span><span class="c1">//The getline function keeps the \n at the end so we remove by assigning the null character at that location.</span>
+<span class="w">         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="n">nRead</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">){</span>
+<span class="w">          </span><span class="n">line</span><span class="p">[</span><span class="n">nRead</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="c1">// Done using line so I must free it!!</span>
 <span class="w">        </span><span class="n">free</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">//Make sure to reset line back to null for the next line</span>
@@ -481,7 +482,7 @@ If <code class="docutils literal notranslate"><span class="pre">*lineptr</span><
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>For the purposes of this assignment, we can grab the entire contents being read in from standard input using <code class="docutils literal notranslate"><span class="pre">getline</span></code> within a while loop. <code class="docutils literal notranslate"><span class="pre">getline</span></code> will return -1 once it has reached the end of the stream. Otherwise,
+<p>For the purposes of this assignment, we can grab the entire contents being read in from standard input using <code class="docutils literal notranslate"><span class="pre">getline</span></code> within a while loop. <code class="docutils literal notranslate"><span class="pre">getline</span></code> will return <code class="docutils literal notranslate"><span class="pre">-1</span></code> once it has reached the end of the stream (i.e., std-in has closed). Otherwise,
 it returns the number of characters on the line (<code class="docutils literal notranslate"><span class="pre">nRead</span></code>). Notice that line is always set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> before we call <code class="docutils literal notranslate"><span class="pre">getline</span></code>. This is a requirement for this assignment so we can allocate a new string for each line from the stream. Make sure to always free
 the line after you are done using it. Also notice that when calling <code class="docutils literal notranslate"><span class="pre">getline</span></code> we pass in <code class="docutils literal notranslate"><span class="pre">&amp;line</span></code> and <code class="docutils literal notranslate"><span class="pre">&amp;len</span></code>. This is required to make sure it can successfully place in the contents. Note that <code class="docutils literal notranslate"><span class="pre">len</span></code> is not the number of characters on the line but rather it is the length of an internal buffer to hold the characters.
 You can ignore that value for this assignment; however, you still need to pass it in to call <code class="docutils literal notranslate"><span class="pre">getline</span></code>. Make sure to include <code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">_GNU_SOURCE</span></code> because it is required to use <code class="docutils literal notranslate"><span class="pre">getline</span></code>.</p>
@@ -522,7 +523,6 @@ You can ignore that value for this assignment; however, you still need to pass i
 <span class="go">msh&gt; exit</span>
 </pre></div>
 </div>
-<p>As a reminder, <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> only prints the command line arguments for a <code class="docutils literal notranslate"><span class="pre">msh</span></code> line. In the next assignment, we will start running the actual command lines.</p>
 </section>
 </section>
 <section id="task-3-build-sh">
@@ -561,17 +561,7 @@ You can ignore that value for this assignment; however, you still need to pass i
 </section>
 <section id="submission">
 <h2>Submission<a class="headerlink" href="#submission" title="Link to this heading">¶</a></h2>
-<p>Before submitting, make sure you’ve added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the “Milestone #1” assignment page via two ways,</p>
-<ol class="arabic simple">
-<li><p><strong>Uploading from Github directly (recommended way)</strong>: You can link your Github account to your Gradescope account and upload the correct repository based on
-the homework assignment. When you submit your homework, a pop window will appear. Click on “Github” and then  “Connect to Github” to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be “main” or “master”) for this course.</p></li>
-<li><p><strong>Uploading via a Zip file</strong>: You can also upload a zip file of the homework directory. Please make sure you upload the entire directory and keep the initial structure the <strong>same</strong> as the starter code; otherwise, you run the risk of not passing the automated tests.</p></li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For either option, you must upload the entire directory structure; otherwise, your automated test grade will not run correctly and you will
-be <strong>penalized</strong> if we have to manually run the tests. Going with the first option will do this automatically for you. You can always add additional directories and files (and even files/directories inside the stater directories) but the default directory/file structure must not change.</p>
-</div>
+<p>Before submitting, make sure you’ve added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the “Milestone #1” assignment page by linking your Github account to your Gradescope account and upload the correct repository based on the homework assignment. When you submit your homework, a pop window will appear. Click on “Github” and then  “Connect to Github” to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be “main” or “master”) for this course.</p>
 <p>Depending on the assignment, once you submit your work, an “autograder” will run. This autograder should produce the same test results as when you run the code yourself; if it doesn’t, please let us know so we can look into it. A few other notes:</p>
 <ul class="simple">
 <li><p>You are allowed to make as many submissions as you want before the deadline.</p></li>
