@@ -23,8 +23,13 @@ The lectures are a series of approx 15-20 minute videos. **Please come back here
 
 - 3.1 - Process Control 
 
-C Bootcamp 
--
+`C Bootcamp Videos: <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=0de23cde-9be3-4ef0-8a30-b387017d06c3>`_
+
+- Advanced C (Part 1)
+- Advanced C (Part 2)
+- Advanced C (Part 3)
+- Advanced C (Part 4)
+- Advanced C (Part 5)
 
 The slides presented in these videos are accessible in the upstream repository.
 
