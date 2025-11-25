@@ -463,9 +463,6 @@ Here are few sample runs of the ``msh`` shell at this point in its development. 
   $ msh -l 5
   msh> ls -la /mpcs; 
   error: reached the maximum line limit 
-  msh> ls 
-  argv[0]=ls
-  argc=1
   msh> exit 
 
 
@@ -488,7 +485,7 @@ Inside your ``tests`` directory, you can test your ``shell`` library by running 
 .. code-block:: console  
   
   $ cd tests 
-  $ gcc -I../include/ -o test_seperate_args ../src/shell.c test_separate_args.c && ./test_seperate_args 
+  $ gcc -I../include/ -o test_parse_tok ../src/shell.c ../src/job.c test_parse_tok.c && ./test_seperate_args 
 
 You can do the same for ``test_parse_tok.c``. 
 
@@ -497,7 +494,7 @@ You can test the running of the ``msh`` program by running the tests inside ``te
 .. code-block:: console  
   
   $ cd tests/milestone1 
-  $ bash run.sh #Make sure the msh executable is built first and is inside the bin directory (i.e., bin/msh)
+  $ bash test_msh.sh #Make sure the msh executable is built first and is inside the bin directory (i.e., bin/msh)
 
 Please let Professor Samuels know if there is any issues running these tests on Ed. 
 

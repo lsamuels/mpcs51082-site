@@ -521,9 +521,6 @@ You can ignore that value for this assignment; however, you still need to pass i
 <span class="gp">$ </span>msh<span class="w"> </span>-l<span class="w"> </span><span class="m">5</span>
 <span class="go">msh&gt; ls -la /mpcs;</span>
 <span class="go">error: reached the maximum line limit</span>
-<span class="go">msh&gt; ls</span>
-<span class="go">argv[0]=ls</span>
-<span class="go">argc=1</span>
 <span class="go">msh&gt; exit</span>
 </pre></div>
 </div>
@@ -542,13 +539,13 @@ You can ignore that value for this assignment; however, you still need to pass i
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
 <p>Inside your <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory, you can test your <code class="docutils literal notranslate"><span class="pre">shell</span></code> library by running the tests inside the <code class="docutils literal notranslate"><span class="pre">test_seperate_args</span></code>  and <code class="docutils literal notranslate"><span class="pre">test_parse_tok.c</span></code>. For example, here’s how to build <code class="docutils literal notranslate"><span class="pre">test_seperate_args</span></code>,</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>tests
-<span class="gp">$ </span>gcc<span class="w"> </span>-I../include/<span class="w"> </span>-o<span class="w"> </span>test_seperate_args<span class="w"> </span>../src/shell.c<span class="w"> </span>test_separate_args.c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./test_seperate_args
+<span class="gp">$ </span>gcc<span class="w"> </span>-I../include/<span class="w"> </span>-o<span class="w"> </span>test_parse_tok<span class="w"> </span>../src/shell.c<span class="w"> </span>../src/job.c<span class="w"> </span>test_parse_tok.c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./test_seperate_args
 </pre></div>
 </div>
 <p>You can do the same for <code class="docutils literal notranslate"><span class="pre">test_parse_tok.c</span></code>.</p>
 <p>You can test the running of the <code class="docutils literal notranslate"><span class="pre">msh</span></code> program by running the tests inside <code class="docutils literal notranslate"><span class="pre">tests/milestone1</span></code>. Specifically, you can do the following</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>tests/milestone1
-<span class="gp">$ </span>bash<span class="w"> </span>run.sh<span class="w"> </span><span class="c1">#Make sure the msh executable is built first and is inside the bin directory (i.e., bin/msh)</span>
+<span class="gp">$ </span>bash<span class="w"> </span>test_msh.sh<span class="w"> </span><span class="c1">#Make sure the msh executable is built first and is inside the bin directory (i.e., bin/msh)</span>
 </pre></div>
 </div>
 <p>Please let Professor Samuels know if there is any issues running these tests on Ed.</p>
