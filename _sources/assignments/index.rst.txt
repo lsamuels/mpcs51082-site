@@ -13,7 +13,8 @@ Homework
 
 Project 
 =======
-- `Milestone #1 <./milestone1/index.html>`__, due December 2nd at 11:59pm CDT
+- `Milestone #1 <./milestone1/index.html>`__, due December 3rd at 11:59pm CDT
+- `Milestone #2 <./milestone2/index.html>`__, due December 12th at 11:59pm CDT
 
 
 Assignment Rubric 

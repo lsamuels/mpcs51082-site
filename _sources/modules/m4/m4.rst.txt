@@ -52,4 +52,5 @@ Week 8
 
 Assignment
 ----------------------
-* `Milestone #3 <../../assignments/milestone3/index.html>`__, due March 11th at 11:59pm CDT
+* `Milestone #1 <../../assignments/milestone1/index.html>`__, due December 3rd at 11:59pm CDT
+* `Milestone #2 <../../assignments/milestone2/index.html>`__, due December 13th at 11:59pm CDT

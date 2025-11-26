@@ -2,7 +2,7 @@
 Milestone #1
 ==========================================
 
-**Due: Monday, Tuesday December 2nd at 11:59pm**
+**Due:  Wednesday December 3rd at 11:59pm**
 
 In this assignment, we will begin implementing the course project: a shell program. This assignment focuses on understanding the repository structure and getting the initial parsing of the shell commands correct.  
 
