@@ -487,7 +487,7 @@ Inside your ``tests`` directory, you can test your ``shell`` library by running 
   $ cd tests 
   $ gcc -I../include/ -o test_parse_tok ../src/shell.c ../src/job.c test_parse_tok.c && ./test_parse_tok 
 
-You can do the same for ``test_parse_tok.c``. 
+You can do the same for ``test_seperate_args.c``. 
 
 You can test the running of the ``msh`` program by running the tests inside ``tests/milestone1``. Specifically, you can do the following 
 
