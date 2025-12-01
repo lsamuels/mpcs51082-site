@@ -480,12 +480,12 @@ This should build the executable ``msh`` and place it inside the ``bin`` directo
 
 Testing 
 ~~~~~~~~
-Inside your ``tests`` directory, you can test your ``shell`` library by running the tests inside the ``test_seperate_args``  and ``test_parse_tok.c``. For example, here's how to build ``test_seperate_args``, 
+Inside your ``tests`` directory, you can test your ``shell`` library by running the tests inside the ``test_seperate_args``  and ``test_parse_tok.c``. For example, here's how to build ``test_parse_tok``, 
 
 .. code-block:: console  
   
   $ cd tests 
-  $ gcc -I../include/ -o test_parse_tok ../src/shell.c ../src/job.c test_parse_tok.c && ./test_seperate_args 
+  $ gcc -I../include/ -o test_parse_tok ../src/shell.c ../src/job.c test_parse_tok.c && ./test_parse_tok 
 
 You can do the same for ``test_parse_tok.c``. 
 

@@ -27,6 +27,11 @@ Week 8
 - 4.1: Unix I/O Functions 
 - 4.2: Standard I/O Functions 
 
+Wee 9 
+~~~~~
+- 4.3: File Systems 
+- 4.4: Networking in Unix 
+
 The slides presented in these videos are accessible in the upstream repository.
 
 Resources/Readings 
@@ -49,6 +54,16 @@ Week 8
    - **Thursday November 20th 5:30pm-7:30pm** 
 - Session Outline 
    - Exam 
+
+Week 9 
+~~~~~~~
+- Dates/Times
+   - **Monday December 1st 10:30am-12:20pm** 
+   - **Thursday November 4th 5:30pm-7:30pm** 
+- Session Outline 
+   - Virtual Memory 
+   - Unix File systems  
+   - Course recap 
 
 Assignment
 ----------------------
