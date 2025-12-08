@@ -55,8 +55,7 @@ If you run into any issues, or need us to make any manual adjustments to your re
 ``msh``: A Unix-like shell
 ============================
 For the last three assignments, you will apply what you have learned in the course to build your own Unix-like shell called ``msh`` (i.e., MPCS shell). This shell will not include everything that the ``bash`` shell provides; however, many of the topics covered in the course will be implemented within ``msh``.  
-Each assignment represents reaching a milestone for the project, where each will be a continuation of the prior that entails adding additional components to the shell. We will provide you the opportunity to resubmit the programming portions of each assignment for a better grade. **However, this will only result in partial points being rewarded back and not all**. 
-Although we are allowing for resubmissions, we recommend that you make progress each week to ensure you'll be able to complete it all by the last assignment. 
+Each assignment represents reaching a milestone for the project, where each will be a continuation of the prior that entails adding additional components to the shell.  
 
 The first task in implementing ``msh`` is understanding the repository structure of the shell, which is described in the next section.
 
