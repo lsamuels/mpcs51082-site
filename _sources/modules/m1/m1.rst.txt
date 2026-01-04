@@ -24,18 +24,6 @@ Week 1 Videos
 * 1.2 - Shell Scripting 
 * 1.3 - Demo: Shell-Scripting & Street Cleaning  
  
-Week 2 Videos 
-~~~~~~~~~~~~~~
-* 1.4 - Executing Commands and Arithmetic Expression 
-* 1.5 - Process Substitution, Globbing Syntax
-* 1.6 - Parameter Expansion 
-* 1.7 - Syntax Functions, Arrays, Dictionaries
-
-Week 3 Videos 
-~~~~~~~~~~~~~~
-* 1.8 - Shell Aliasing & History
-* 1.9 - Shell Environment and Configuration
-* 1.10 - Shell Configuration Demo
 
 The slides presented in lecture and these videos are accessible on our Canvas Page. Click on the Files link and you then can download the m1.zip file.
 
@@ -54,38 +42,15 @@ As a reminder here are the dates and times for the synchronous session for this 
 Week 1 
 ~~~~~~~
 - Dates/Times
-   -  Section 1: **Monday September 29th 10:30am-12:20am** 
-   -  Section 2: **Thursday October 2nd  05:30pm-7:20pm** 
+   -  Section 1: **Tuesday January 6th 5:30pm-7:30pm** 
 - Session Outline 
    - Course logistics and Unix architecture overview
    - Shell Command Execution and Globbing 
    - Text Processing/Filter Commands 
 
 
-Week 2 
-~~~~~~~
-- Dates/Times
-   -  Section 1: **Monday October 6th 10:30am-12:20am** 
-   -  Section 2: **Thursday October 9th  05:30pm-7:30pm** 
-- Session Outline 
-   - Finding files in the filesystem 
-   - Advance Bash Syntax [as time permits]
-
-Week 3 
-~~~~~~~
-- Dates/Times
-   -  Section 1: **Monday October 13th 10:30am-12:20am** 
-   -  Section 2: **Thursday October 16th  05:30pm-7:30pm** 
-- Session Outline 
-   - Using regular expressions to find search/modify text in Unix 
-   - Midterm discussion 
-   - Shell Aliasing/History [as time permits]
-
-
-
 Assignment
 ----------------------
-Assignments are always **due** on Friday evenings. 
+Assignments are always **due** on Wednesday evenings. 
 
-* `Homework #1  <../../assignments/hw1/index.html>`__, due October 10th at 11:59pm CDT
-* `Homework #2  <../../assignments/hw2/index.html>`__, due October 17th at 11:59pm CDT
+* `Homework #1 (Coming Soon)  <../../assignments/hw1/index.html>`__, due January 14th at 11:59pm CDT

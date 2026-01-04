@@ -42,18 +42,6 @@ Here is the information that you will see when the hybrid/remote office hours po
     let us know if you would prefer not to do this. You will know when you are coming up soon because 
     the instructor or TA will click the “Resolved” button to indicate we have completed a session.
 
-+-----------+-----------------+--------------------------+-------------------------------------+
-+ **Day**   | **Time**        | **Who**                  | **Type (Location)**                 | 
-+-----------+-----------------+--------------------------+-------------------------------------+
-| Monday    | 1:00pm-2:30pm   | Lamont Samuels           | Hybrid (JCL 398D/Zoom)              |
-+-----------+-----------------+--------------------------+-------------------------------------+
-| Monday    | 3:30pm-5:00pm   | Daniel Sheeler           |  Remote (Zoom)                      |     
-+-----------+-----------------+--------------------------+-------------------------------------+
-| Tuesday   | 4:00pm-5:00pm   | Jiayue Chen              |  Remote (Zoom)                      | 
-+-----------+-----------------+--------------------------+-------------------------------------+
-| Wednesday | 10:00am-11:30am | Jiayue Chen              |  Remote (Zoom)                      | 
-+-----------+-----------------+--------------------------+-------------------------------------+
-| Thursday  | 3:30pm-5:00pm   | Daniel Sheeler           |  Remote (Zoom )                     | 
-+-----------+-----------------+--------------------------+-------------------------------------+
+TBD 
 
 

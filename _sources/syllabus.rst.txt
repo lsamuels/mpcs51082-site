@@ -19,9 +19,9 @@ The course material will be split into six modules that will span 1-2 weeks thro
 - M1: The Unix Shell (Week 1-2): Learn how to interact with Unix through the command line, mastering essential commands, syntax, and scripting basics.
 - M2: Unix Processes and Management(Week 3 - 4): Look at the internal structures of programs and processes in Unix and how they are managed. 
 - M3: Interacting with the Unix Kernel(Week 5-6): Explore how user programs communicate with the kernel through system calls and how the kernel manages resources. 
-- M4: Unix File Systems (Week 7): Study how Unix organizes files and directories, with emphasis on permissions, links, and the virtual file system.
-- M5: Networking in Unix (Week 8): Gain practical experience with network tools and commands, learning how Unix systems communicate over local and remote connections.
-- M6: Advanced Kernel Subsystems (Week 9) – Examine advanced features such as memory management, device drivers, and interprocess communication.
+- M4: Unix File Systems and Networking in Unix (Week 7): Study how Unix organizes files and directories, with emphasis on permissions, links, and the virtual file system.Gain practical experience with network tools and commands, learning how Unix systems communicate over local and remote connections.
+- M5: Inter-Process Communication (Week 8): Understand how processes communication with each other. 
+- M6: Advanced Kernel Subsystems (Week 9): Examine advanced features such as memory management, device drivers. 
 The delivery of the course content will follow a flipped classroom model, where lecture material and course content will be provided in two ways:
 
 - **Synchronous content** (*i.e., in-person*): Each week during our normal class time, we will meet in person at the time and location designated above. The synchronous sessions will include:
@@ -49,28 +49,24 @@ The course will include weekly homework, one midterm exam, attendance and projec
 
    As long as you continuously do those two main points you will receive full credit for attendance. 
 
-* **Exam** - There will be two exams in the course. Please see the *Exams* section for more details. 
+* **Exam** - There will be one exam in the course. Please see the *Exams* section for more details. 
 
-All homework will be due and out on **Friday @ 11:59pm**.  
+All homework will be due and out on **Wednesday @ 11:59pm**.  
 
 Please see the `Assignments Rubric <assignments/index.html>`__ page for
 more details on how the assignments will be graded.
 
 Exams 
 ~~~~~~~~~~~~~~~~~~~~~~~
-There will be two exams in this course. The exams will be a mixture of coding exercises and short-answer questions. The exam will be in-person during our normal classroom time.
+There will be one exam in this course. The exam will be a mixture of coding exercises and short-answer questions. The exam will be in-person during our normal classroom time.
 
-+-----------------+--------------+-----------------------------------------------+
-| Exam            | Time Limit   | Date                                          |
-+=================+==============+===============================================+
-| Midterm Exam    | 120 minutes  | | **Monday Section: October 20th @ 10:30am**  |
-|                 |              | | **Thursday Section: October 23rd @ 5:30pm** |                 
-+-----------------+--------------+-----------------------------------------------+
-| Final Exam      | 120 minutes  | | **Monday Section: November 17th @ 10:30am** |
-|                 |              | | **Thursday Section: November 20th @ 5:30pm**|                 
-+-----------------+--------------+-----------------------------------------------+
++-------------+--------------+-----------------------------------------------+
+| Exam        | Time Limit   | Date                                          |
++=============+==============+===============================================+
+| Quarter Exam| 120 minutes  |  **February 24th @ 7:30pm**                   |
++-------------+--------------+-----------------------------------------------+
 
-The exams location is in our normal classroom at the same time. There are no make-up exams in this class. There also will not be any earlier exams taken unless due to extraordinary circumstances such as an medical emergency.
+The exam location is in our normal classroom at the same time. There are no make-up exam in this class. There also will not be any earlier exam taken unless due to extraordinary circumstances such as an medical emergency.
 
 Course Software 
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -94,15 +90,13 @@ Grading
 Your final grade will be based on the following:
 
 +----------------------------------------------+-----+
-| Homework 1-4 (5% each)                       | 20% |
+| Homework 1-6 (5% each)                       | 30% |
 +----------------------------------------------+-----+
-| Milestone 1                                  | 5%  |
+| Milestone 1                                  | 10% |
 +----------------------------------------------+-----+
-| Milestone 2                                  | 20% |
+| Milestone 2                                  | 30% |
 +----------------------------------------------+-----+
-| Midterm Exam                                 | 20% |
-+----------------------------------------------+-----+
-| Final Exam                                   | 30% |
+| Quarter Exam                                 | 35% |
 +----------------------------------------------+-----+
 | Attendance                                   | 5%  |
 +----------------------------------------------+-----+
