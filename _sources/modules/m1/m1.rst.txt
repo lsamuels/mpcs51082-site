@@ -13,7 +13,7 @@ Pre-recorded Lectures
 ---------------------
 **Note: Professor Samuels will state on Ed when the prerecorded videos are ready to be viewed each week for a module.**
 
-The pre-recorded lectures are available here: `M1 Videos <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=c068dff9-269e-48d2-acdc-b3690163bc7b>`_.
+The pre-recorded lectures are available here: `M1 Videos <...>`_.
 You can also find the videos under the "Panopto" tab on the MPCS 51082 canvas site.
 
 **Please come back here weekly as the videos will be updated if a module spans multiple weeks.** This module includes the following videos: 
@@ -46,7 +46,7 @@ Week 1
 - Session Outline 
    - Course logistics and Unix architecture overview
    - Shell Command Execution and Globbing 
-   - Text Processing/Filter Commands 
+   - Text Processing/Filter Commands [if time permits]
 
 
 Assignment
