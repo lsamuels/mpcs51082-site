@@ -2,7 +2,7 @@
 Homework #1 
 ==========================================
 
-**Due: Friday, October 10th at 11:59pm**
+**Due: Friday, January 14th at 11:59pm**
 
 This homework is intended to server as an introduction to bash shell scripting, basic Unix commands, and using filtering (i.e., text processing) commands to process text. 
 This assignment is not meant to cover everything in the bash scripting language or to use a large number of built-in utility commands. 
