@@ -117,28 +117,15 @@
 <li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#problem-2-are-two-street-cleaning-files-different">Problem 2 -  Are Two Street-Cleaning Files Different?</a><ul>
+<li><a class="reference internal" href="#problem-2-sections-per-ward">Problem 2 - Sections per Ward</a><ul>
 <li><a class="reference internal" href="#id1">Examples</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#problem-3-sections-per-ward">Problem 3 - Sections per Ward</a><ul>
-<li><a class="reference internal" href="#id2">Examples</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#problem-4-ward-section-directory-pack">Problem 4 - Ward/Section Directory Pack</a><ul>
+<li><a class="reference internal" href="#problem-3-ward-section-directory-pack">Problem 3 - Ward/Section Directory Pack</a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#naming-structure-requirements">Naming &amp; Structure Requirements</a></li>
-<li><a class="reference internal" href="#id3">Examples</a><ul>
+<li><a class="reference internal" href="#id2">Examples</a><ul>
 <li><a class="reference internal" href="#hint"><strong>Hint</strong></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#problem-5-print-the-days">Problem 5 - Print the Days</a><ul>
-<li><a class="reference internal" href="#id4">Usage</a></li>
-<li><a class="reference internal" href="#requirements">Requirements</a></li>
-<li><a class="reference internal" href="#id5">Examples</a><ul>
-<li><a class="reference internal" href="#id6"><strong>Hint</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -223,7 +210,7 @@ GitHub account. If you do not yet have one, you can get an account here: <a clas
 <h2><strong>IMPORTANT:</strong> Eligible Commands &amp; Bash<a class="headerlink" href="#important-eligible-commands-bash" title="Link to this heading">¶</a></h2>
 <p>For this homework assignment, you are only allowed to use the following commands with or without using their options in your scripts.</p>
 <ul class="simple">
-<li><p>Commands used in the Week 1, module 1 slides (i.e., <code class="docutils literal notranslate"><span class="pre">m1_week1.pdf</span></code>)</p></li>
+<li><p>Commands used in the Week 1, module 1 slides (i.e., <code class="docutils literal notranslate"><span class="pre">m1.pdf</span></code>)</p></li>
 <li><p>Commands presented in the Unix Bootcamp Modules 0-7 <strong>only</strong></p></li>
 <li><p>tr</p></li>
 <li><p>exit</p></li>
@@ -368,52 +355,16 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 </div>
 </section>
 </section>
-<section id="problem-2-are-two-street-cleaning-files-different">
-<h2>Problem 2 -  Are Two Street-Cleaning Files Different?<a class="headerlink" href="#problem-2-are-two-street-cleaning-files-different" title="Link to this heading">¶</a></h2>
-<p>Inside <code class="docutils literal notranslate"><span class="pre">p2/p2.sh</span></code>, write a Bash script that takes <strong>two</strong> street-cleaning CSV files and reports whether they are <strong>different</strong>.</p>
-<p>You mus <code class="docutils literal notranslate"><span class="pre">diff</span> <span class="pre">-q</span></code> command to compare the two files. The <code class="docutils literal notranslate"><span class="pre">-q</span></code> for <code class="docutils literal notranslate"><span class="pre">diff</span></code> in short says <em>tell me if they differ, but don’t show the differences.</em> If the files are identical, <code class="docutils literal notranslate"><span class="pre">diff</span> <span class="pre">-q</span></code> prints nothing (just returns exit code 0).</p>
-<p><strong>Output</strong></p>
-<ul class="simple">
-<li><p>Print <strong>``YES``</strong> if the files are different (<code class="docutils literal notranslate"><span class="pre">diff</span> <span class="pre">-q</span></code> exits with status 1).</p></li>
-<li><p>Print <strong>``NO``</strong> if the files are identical (<code class="docutils literal notranslate"><span class="pre">diff</span> <span class="pre">-q</span></code> exits with status 0).</p></li>
-<li><p>Do not include <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-o</span> <span class="pre">errexit</span></code> in this script file.</p></li>
-</ul>
-<p>The script must accept <strong>exactly two</strong> arguments: the paths to the CSV files. If both files are <strong>not</strong> specified, the script must <strong>exit with status 1</strong> and print:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:<span class="w"> </span>p2.sh<span class="w"> </span>SCHEDULE_FILE1<span class="w"> </span>SCHEDULE_FILE2
-</pre></div>
-</div>
-<p>The <strong>only</strong> output for valid comparisons should be either <code class="docutils literal notranslate"><span class="pre">YES</span></code> or <code class="docutils literal notranslate"><span class="pre">NO</span></code> (do not print any additional text).</p>
-<section id="id1">
-<h3>Examples<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
-<p>Identical files:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>p2.sh<span class="w"> </span>../data/orig_sched.csv<span class="w"> </span>../data/orig_sched.csv
-NO
-</pre></div>
-</div>
-<p>Different files:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>p2.sh<span class="w"> </span>../data/orig_sched.csv<span class="w"> </span>../data/sched_003.csv
-YES
-</pre></div>
-</div>
-<p>Missing arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>p2.sh<span class="w"> </span>../data/orig_sched.csv
-Usage:<span class="w"> </span>p2.sh<span class="w"> </span>SCHEDULE_FILE1<span class="w"> </span>SCHEDULE_FILE2
-$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
-<span class="m">1</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="problem-3-sections-per-ward">
-<h2>Problem 3 - Sections per Ward<a class="headerlink" href="#problem-3-sections-per-ward" title="Link to this heading">¶</a></h2>
-<p>Inside <code class="docutils literal notranslate"><span class="pre">p3/p3.sh</span></code>, write a Bash script that takes a street-cleaning CSV file and prints, <strong>for each ward</strong>, the <strong>total number of unique sections</strong> in that ward. The script must accept exactly <strong>one</strong> argument: the path to the CSV (e.g., <code class="docutils literal notranslate"><span class="pre">data/orig_sched_modified.csv</span></code>). If <strong>no file</strong> is provided, the script must <strong>exit with status 1</strong> and print:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:<span class="w"> </span>p3.sh<span class="w"> </span>SCHEDULE_FILE
+<section id="problem-2-sections-per-ward">
+<h2>Problem 2 - Sections per Ward<a class="headerlink" href="#problem-2-sections-per-ward" title="Link to this heading">¶</a></h2>
+<p>Inside <code class="docutils literal notranslate"><span class="pre">p2/p2.sh</span></code>, write a Bash script that takes a street-cleaning CSV file and prints, <strong>for each ward</strong>, the <strong>total number of unique sections</strong> in that ward. The script must accept exactly <strong>one</strong> argument: the path to the CSV (e.g., <code class="docutils literal notranslate"><span class="pre">data/orig_sched_modified.csv</span></code>). If <strong>no file</strong> is provided, the script must <strong>exit with status 1</strong> and print:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:<span class="w"> </span>p2.sh<span class="w"> </span>SCHEDULE_FILE
 </pre></div>
 </div>
 <p><strong>Output format</strong>: one ward per line as: <code class="docutils literal notranslate"><span class="pre">WARD</span> <span class="pre">COUNT</span></code> sorted in ascending order by ward number.</p>
-<section id="id2">
-<h3>Examples<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>p3.sh<span class="w"> </span>../data/orig_sched.csv
+<section id="id1">
+<h3>Examples<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>p2.sh<span class="w"> </span>../data/orig_sched.csv
 <span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">11</span>
 <span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">7</span>
 <span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">13</span>
@@ -467,20 +418,20 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 </pre></div>
 </div>
 <p>Missing arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>p3.sh
-Usage:<span class="w"> </span>p3.sh<span class="w"> </span>SCHEDULE_FILE
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>p2.sh
+Usage:<span class="w"> </span>p2.sh<span class="w"> </span>SCHEDULE_FILE
 $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
 <span class="m">1</span>
 </pre></div>
 </div>
 </section>
 </section>
-<section id="problem-4-ward-section-directory-pack">
-<h2>Problem 4 - Ward/Section Directory Pack<a class="headerlink" href="#problem-4-ward-section-directory-pack" title="Link to this heading">¶</a></h2>
-<p>Inside <code class="docutils literal notranslate"><span class="pre">p4/p4.sh</span></code>, write a Bash script that, given a street-cleaning CSV, a <strong>ward</strong>, and a <strong>section</strong>, creates a top-level directory named from the ward/section (with <strong>leading zeros</strong>) and a month-by-month subfolder layout. Each month folder must contain a single file <code class="docutils literal notranslate"><span class="pre">dates.txt</span></code> holding the <strong>DATES</strong> string for that month.</p>
+<section id="problem-3-ward-section-directory-pack">
+<h2>Problem 3 - Ward/Section Directory Pack<a class="headerlink" href="#problem-3-ward-section-directory-pack" title="Link to this heading">¶</a></h2>
+<p>Inside <code class="docutils literal notranslate"><span class="pre">p3/p3.sh</span></code>, write a Bash script that, given a street-cleaning CSV, a <strong>ward</strong>, and a <strong>section</strong>, creates a top-level directory named from the ward/section (with <strong>leading zeros</strong>) and a month-by-month subfolder layout. Each month folder must contain a single file <code class="docutils literal notranslate"><span class="pre">dates.txt</span></code> holding the <strong>DATES</strong> string for that month.</p>
 <section id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:<span class="w"> </span>p4.sh<span class="w"> </span><span class="o">[</span>-z<span class="o">]</span><span class="w"> </span>SCHEDULE_FILE<span class="w"> </span>WARD<span class="w"> </span>SECTION
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:<span class="w"> </span>p3.sh<span class="w"> </span><span class="o">[</span>-z<span class="o">]</span><span class="w"> </span>SCHEDULE_FILE<span class="w"> </span>WARD<span class="w"> </span>SECTION
 </pre></div>
 </div>
 <ul>
@@ -489,7 +440,7 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 <li><p><code class="docutils literal notranslate"><span class="pre">SECTION</span></code>: section number (integer)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-z</span></code> (optional): after creating the directory structure, zip it using the top-level name</p></li>
 <li><p>If arguments are missing, print:</p>
-<p><code class="docutils literal notranslate"><span class="pre">Usage:</span> <span class="pre">p4.sh</span> <span class="pre">[-z]</span> <span class="pre">SCHEDULE_FILE</span> <span class="pre">WARD</span> <span class="pre">SECTION</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">Usage:</span> <span class="pre">p3.sh</span> <span class="pre">[-z]</span> <span class="pre">SCHEDULE_FILE</span> <span class="pre">WARD</span> <span class="pre">SECTION</span></code></p>
 <p>and <strong>exit 1</strong>.</p>
 </li>
 <li><p>You can assume the ward/section provided as command line arguments do exist in the given file CSV.</p></li>
@@ -511,10 +462,10 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 <li><p>Do not create a top-level directory if the ward and section given has no records in the given file. Additionally if a top-level directory is not created and the <code class="docutils literal notranslate"><span class="pre">-z</span></code> is provided then do not make a zip file.</p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>Examples<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<section id="id2">
+<h3>Examples<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <p>Input:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>p4.sh<span class="w"> </span>../data/orig_sched.csv<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>p3.sh<span class="w"> </span>../data/orig_sched.csv<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 <p>Creates:</p>
@@ -536,7 +487,7 @@ $<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><sp
 </pre></div>
 </div>
 <p>With zip:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>p4.sh<span class="w"> </span>-z<span class="w"> </span>../data/orig_sched.csv<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>p3.sh<span class="w"> </span>-z<span class="w"> </span>../data/orig_sched.csv<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3</span>
 <span class="c1"># Produces W01_S03/ ... and W01_S03.zip</span>
 </pre></div>
 </div>
@@ -549,81 +500,7 @@ For example:</p>
 </pre></div>
 </div>
 <p>This command selects the third field <strong>and all fields after it</strong> from each line of <code class="docutils literal notranslate"><span class="pre">data.txt</span></code>.</p>
-</section>
-</section>
-</section>
-<section id="problem-5-print-the-days">
-<h2>Problem 5 - Print the Days<a class="headerlink" href="#problem-5-print-the-days" title="Link to this heading">¶</a></h2>
-<p>Inside <code class="docutils literal notranslate"><span class="pre">p5/p5.sh</span></code>, write a Bash script that, given a street-cleaning CSV file, a <strong>ward</strong>, a <strong>section</strong>, and a <strong>month</strong>, prints the days for that street cleaning for that month within the given ward and section.</p>
-<section id="id4">
-<h3>Usage<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>p5.sh<span class="w"> </span>SCHEDULE_FILE<span class="w"> </span>WARD<span class="w"> </span>SECTION<span class="w"> </span>MONTH
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">SCHEDULE_FILE</span></code>: path to the CSV (e.g., <code class="docutils literal notranslate"><span class="pre">data/orig_sched.csv</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">WARD</span></code>: ward number (integer)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SECTION</span></code>: section number (integer)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MONTH</span></code>: month number (integer; e.g., 4 for April … 11 for November)</p></li>
-</ul>
-</section>
-<section id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h3>
-<ul>
-<li><p>If any argument is <strong>missing</strong>, print the exact usage string below and <strong>exit 1</strong>:</p>
-<p><code class="docutils literal notranslate"><span class="pre">Usage:</span> <span class="pre">p5.sh</span> <span class="pre">SCHEDULE_FILE</span> <span class="pre">WARD</span> <span class="pre">SECTION</span> <span class="pre">MONTH</span></code></p>
-</li>
-<li><p>Output: The days (each on its separate line) for street cleaning within the given month for the specified ward and section. Do not print anything if no days are found for that month within the given ward and section.</p></li>
-</ul>
-</section>
-<section id="id5">
-<h3>Examples<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
-<p>Days found:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>p5.sh<span class="w"> </span>data/orig_sched.csv<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">4</span>
-<span class="m">4</span>
-<span class="m">5</span>
-</pre></div>
-</div>
-<p>No days found:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>p5.sh<span class="w"> </span>data/orig_sched.csv<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>
-$
-</pre></div>
-</div>
-<p>Missing arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>p5.sh<span class="w"> </span>data/orig_sched.csv<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span>
-Usage:<span class="w"> </span>p5.sh<span class="w"> </span>SCHEDULE_FILE<span class="w"> </span>WARD<span class="w"> </span>SECTION<span class="w"> </span>MONTH
-$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
-<span class="m">1</span>
-</pre></div>
-</div>
-<section id="id6">
-<h4><strong>Hint</strong><a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">tr</span></code> command reads from standard input and <strong>translates</strong>, <strong>squeezes</strong>, or <strong>deletes</strong> characters, writing the result to standard output.</p>
-<p><strong>Translate lowercase → uppercase:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello, world&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;a-z&#39;</span><span class="w"> </span><span class="s1">&#39;A-Z&#39;</span>
-<span class="c1"># HELLO, WORLD</span>
-</pre></div>
-</div>
-<p><strong>Replace spaces with newlines (split into one-per-line):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;alpha beta gamma&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span>
-<span class="c1"># alpha</span>
-<span class="c1"># beta</span>
-<span class="c1"># gamma</span>
-</pre></div>
-</div>
-<p><strong>Squeeze repeated spaces to a single space (`-s`):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;a   b    c&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39; &#39;</span>
-<span class="c1"># a b c</span>
-</pre></div>
-</div>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">-d</span></code>: <strong>delete</strong> all occurrences of the specified characters instead of translating.</dt><dd><p>Example: remove commas from a stream:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;1,2,3&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;,&#39;</span>
-<span class="c1"># -&gt; 123</span>
-</pre></div>
-</div>
-</dd>
-</dl>
+<p>To make a zip file of a directory: <code class="docutils literal notranslate"><span class="pre">zip</span> <span class="pre">-r</span> <span class="pre">FILE</span> <span class="pre">DIR</span></code>, where <code class="docutils literal notranslate"><span class="pre">FILE</span></code> is the name of the zip file and <code class="docutils literal notranslate"><span class="pre">DIR</span></code> is the directory to include.</p>
 </section>
 </section>
 </section>

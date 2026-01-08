@@ -73,7 +73,7 @@ If you run into any issues, or need us to make any manual adjustments to your re
 ========================================
 For this homework assignment, you are only allowed to use the following commands with or without using their options in your scripts.
 
-- Commands used in the Week 1, module 1 slides (i.e., ``m1_week1.pdf``)  
+- Commands used in the Week 1, module 1 slides (i.e., ``m1.pdf``)  
 - Commands presented in the Unix Bootcamp Modules 0-7 **only**
 - tr 
 - exit 
@@ -224,59 +224,13 @@ No argument provided:
    $ echo $?
    1
 
-Problem 2 -  Are Two Street-Cleaning Files Different? 
-======================================================
-Inside ``p2/p2.sh``, write a Bash script that takes **two** street-cleaning CSV files and reports whether they are **different**.
-
-You mus ``diff -q`` command to compare the two files. The ``-q`` for ``diff`` in short says *tell me if they differ, but don’t show the differences.* If the files are identical, ``diff -q`` prints nothing (just returns exit code 0).
-
-**Output**
-
-- Print **``YES``** if the files are different (``diff -q`` exits with status 1).
-- Print **``NO``** if the files are identical (``diff -q`` exits with status 0).
-- Do not include ``set -o errexit`` in this script file. 
-
-The script must accept **exactly two** arguments: the paths to the CSV files. If both files are **not** specified, the script must **exit with status 1** and print:
-
-.. code-block:: bash
-
-  Usage: p2.sh SCHEDULE_FILE1 SCHEDULE_FILE2
-
-The **only** output for valid comparisons should be either ``YES`` or ``NO`` (do not print any additional text).
-
-Examples
----------
-Identical files:
-
-.. code-block:: bash
-
-   $ bash p2.sh ../data/orig_sched.csv ../data/orig_sched.csv
-   NO
-
-Different files:
-
-.. code-block:: bash
-
-   $ bash p2.sh ../data/orig_sched.csv ../data/sched_003.csv
-   YES
-
-Missing arguments:
-
-.. code-block:: bash
-
-   $ bash p2.sh ../data/orig_sched.csv
-   Usage: p2.sh SCHEDULE_FILE1 SCHEDULE_FILE2
-   $ echo $?
-   1
-
-
-Problem 3 - Sections per Ward
+Problem 2 - Sections per Ward
 ===============================
-Inside ``p3/p3.sh``, write a Bash script that takes a street-cleaning CSV file and prints, **for each ward**, the **total number of unique sections** in that ward. The script must accept exactly **one** argument: the path to the CSV (e.g., ``data/orig_sched_modified.csv``). If **no file** is provided, the script must **exit with status 1** and print:
+Inside ``p2/p2.sh``, write a Bash script that takes a street-cleaning CSV file and prints, **for each ward**, the **total number of unique sections** in that ward. The script must accept exactly **one** argument: the path to the CSV (e.g., ``data/orig_sched_modified.csv``). If **no file** is provided, the script must **exit with status 1** and print:
 
 .. code-block:: bash
 
-  Usage: p3.sh SCHEDULE_FILE
+  Usage: p2.sh SCHEDULE_FILE
 
 **Output format**: one ward per line as: ``WARD COUNT`` sorted in ascending order by ward number. 
 
@@ -284,7 +238,7 @@ Examples
 ---------
 .. code-block:: bash
 
-   $ bash p3.sh ../data/orig_sched.csv
+   $ bash p2.sh ../data/orig_sched.csv
     1 11
     2 7
     3 13
@@ -340,22 +294,22 @@ Missing arguments:
 
 .. code-block:: bash
 
-   $ bash p3.sh
-   Usage: p3.sh SCHEDULE_FILE
+   $ bash p2.sh
+   Usage: p2.sh SCHEDULE_FILE
    $ echo $?
    1
 
 
-Problem 4 - Ward/Section Directory Pack
+Problem 3 - Ward/Section Directory Pack
 =========================================
-Inside ``p4/p4.sh``, write a Bash script that, given a street-cleaning CSV, a **ward**, and a **section**, creates a top-level directory named from the ward/section (with **leading zeros**) and a month-by-month subfolder layout. Each month folder must contain a single file ``dates.txt`` holding the **DATES** string for that month.
+Inside ``p3/p3.sh``, write a Bash script that, given a street-cleaning CSV, a **ward**, and a **section**, creates a top-level directory named from the ward/section (with **leading zeros**) and a month-by-month subfolder layout. Each month folder must contain a single file ``dates.txt`` holding the **DATES** string for that month.
 
 Usage
 ----------
 
 .. code-block:: bash
 
-  Usage: p4.sh [-z] SCHEDULE_FILE WARD SECTION
+  Usage: p3.sh [-z] SCHEDULE_FILE WARD SECTION
 
 - ``SCHEDULE_FILE``: path to the CSV (e.g., ``data/orig_sched.csv``)
 - ``WARD``: ward number (integer)
@@ -363,7 +317,7 @@ Usage
 - ``-z`` (optional): after creating the directory structure, zip it using the top-level name
 - If arguments are missing, print:
 
-  ``Usage: p4.sh [-z] SCHEDULE_FILE WARD SECTION``
+  ``Usage: p3.sh [-z] SCHEDULE_FILE WARD SECTION``
 
   and **exit 1**.
 
@@ -393,7 +347,7 @@ Input:
 
 .. code-block:: bash
 
-   $ p4.sh ../data/orig_sched.csv 1 1
+   $ bash p3.sh ../data/orig_sched.csv 1 1
 
 Creates:
 
@@ -418,7 +372,7 @@ With zip:
 
 .. code-block:: bash
 
-   $ p4.sh -z ../data/orig_sched.csv 1 3
+   $ bash p3.sh -z ../data/orig_sched.csv 1 3
    # Produces W01_S03/ ... and W01_S03.zip
 
 **Hint**
@@ -431,91 +385,7 @@ For example::
 
 This command selects the third field **and all fields after it** from each line of ``data.txt``.
 
-
-Problem 5 - Print the Days 
-===========================
-Inside ``p5/p5.sh``, write a Bash script that, given a street-cleaning CSV file, a **ward**, a **section**, and a **month**, prints the days for that street cleaning for that month within the given ward and section. 
-
-Usage
-------
-.. code-block:: bash
-
-   p5.sh SCHEDULE_FILE WARD SECTION MONTH 
-
-- ``SCHEDULE_FILE``: path to the CSV (e.g., ``data/orig_sched.csv``)
-- ``WARD``: ward number (integer)
-- ``SECTION``: section number (integer)
-- ``MONTH``: month number (integer; e.g., 4 for April … 11 for November)
-
-Requirements
----------------
-- If any argument is **missing**, print the exact usage string below and **exit 1**:
-
-  ``Usage: p5.sh SCHEDULE_FILE WARD SECTION MONTH``
-
-- Output: The days (each on its separate line) for street cleaning within the given month for the specified ward and section. Do not print anything if no days are found for that month within the given ward and section. 
-
-Examples
-----------
-
-Days found:
-
-.. code-block:: bash
-
-   $ p5.sh data/orig_sched.csv 1 1 4 
-   4
-   5
-
-No days found:
-
-.. code-block:: bash
-
-   $ p5.sh data/orig_sched.csv 1 1 2 
-   $ 
-
-Missing arguments:
-
-.. code-block:: bash
-
-   $ p5.sh data/orig_sched.csv 1 1 
-   Usage: p5.sh SCHEDULE_FILE WARD SECTION MONTH 
-   $ echo $?
-   1
-
-**Hint**
-~~~~~~~~~
-The ``tr`` command reads from standard input and **translates**, **squeezes**, or **deletes** characters, writing the result to standard output.  
-
-**Translate lowercase → uppercase:**
-
-.. code-block:: bash
-
-   echo "hello, world" | tr 'a-z' 'A-Z'
-   # HELLO, WORLD
-
-**Replace spaces with newlines (split into one-per-line):**
-
-.. code-block:: bash
-
-   echo "alpha beta gamma" | tr ' ' '\n'
-   # alpha
-   # beta
-   # gamma
-
-**Squeeze repeated spaces to a single space (`-s`):**
-
-.. code-block:: bash
-
-   echo "a   b    c" | tr -s ' '
-   # a b c
-
-``-d``: **delete** all occurrences of the specified characters instead of translating.  
-  Example: remove commas from a stream:
-
-  .. code-block:: bash
-
-     echo "1,2,3" | tr -d ','
-     # -> 123
+To make a zip file of a directory: ``zip -r FILE DIR``, where ``FILE`` is the name of the zip file and ``DIR`` is the directory to include. 
 
 Running the Tests
 =================
