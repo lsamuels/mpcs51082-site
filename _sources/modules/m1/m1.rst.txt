@@ -25,7 +25,7 @@ You can also find the videos under the "Panopto" tab on the MPCS 51082 canvas si
 
 **Please come back here weekly as the videos will be updated if a module spans multiple weeks.** This module includes the following videos: 
 
-Week 1 Videos 
+Week 2 Videos 
 ~~~~~~~~~~~~~~
 * 1.1 - Text Processing
 * 1.2 - Shell Scripting 
@@ -55,9 +55,17 @@ Week 1
    - Shell Command Execution and Globbing 
    - Text Processing/Filter Commands [if time permits]
 
+Week 2 
+~~~~~~~
+- Dates/Times
+   -  Section 1: **Tuesday January 13th 5:30pm-7:30pm** 
+- Session Outline 
+   - Finding files in the filesystem 
+   - Advance Bash Syntax [as time permits]
 
 Assignment
 ----------------------
 Assignments are always **due** on Wednesday evenings. 
 
 *  `Homework #1  <../../assignments/hw1/index.html>`__, due January 14th at 11:59pm CDT
+*  `Homework #2  <../../assignments/hwww2/index.html>`__, due January 21st at 11:59pm CDT
