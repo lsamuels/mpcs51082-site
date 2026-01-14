@@ -2,7 +2,7 @@
 Homework #2 
 =============
 
-**Due: Friday October 17th at 11:59pm**
+**Due: Friday January 21st at 11:59pm**
 
 This homework is intended to provide additional practice with writing Bash scripts. Specifically, using more advanced bash syntax and filtering (i.e., text processing) commands to process text.
 
@@ -44,7 +44,7 @@ When you click on an invitation URL, you will have to complete the following ste
 4. You now need to clone your repository (i.e., download it to your machine). 
     - Make sure you’ve set up `SSH access <https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh>`__ on your GitHub account.
     
-    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51082-aut25/hw2-GITHUB-USERNAME.git. 
+    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51082-win26/hw2-GITHUB-USERNAME.git. 
 
     - If you do not know how to use ``git clone`` to clone your repository then follow this guide that Github provides: `Cloning a Repository <https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository>`__
     
@@ -254,6 +254,8 @@ Run:
 
 - Treat the extension as the text after the final dot in the filename (e.g., ``archive.tar.gz`` → ``gz``).
 - Ignore files without any dot in their basename (no extension).
+- Make sure to use ``LC_ALL=C`` sort before the final sort. This ensures sorting is done in the C (POSIX) locale, which provides consistent and predictable ordering (e.g., Z sorts before a, and accented characters are sorted by byte value).
+- **Spacing matters in Problem 1C** — consider using ``tr`` and ``xargs -L1`` to help match the expected output format.
 
 **Hint (``rev``) command:**  
 

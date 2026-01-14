@@ -134,7 +134,7 @@
       
   <section id="homework-2">
 <h1>Homework #2<a class="headerlink" href="#homework-2" title="Link to this heading">¶</a></h1>
-<p><strong>Due: Friday October 17th at 11:59pm</strong></p>
+<p><strong>Due: Friday January 21st at 11:59pm</strong></p>
 <p>This homework is intended to provide additional practice with writing Bash scripts. Specifically, using more advanced bash syntax and filtering (i.e., text processing) commands to process text.</p>
 <section id="cs-linux-machine">
 <h2>CS Linux Machine<a class="headerlink" href="#cs-linux-machine" title="Link to this heading">¶</a></h2>
@@ -170,7 +170,7 @@ GitHub account. If you do not yet have one, you can get an account here: <a clas
 <li><dl class="simple">
 <dt>You now need to clone your repository (i.e., download it to your machine).</dt><dd><ul class="simple">
 <li><p>Make sure you’ve set up <a class="reference external" href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">SSH access</a> on your GitHub account.</p></li>
-<li><p>For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: <a class="reference external" href="mailto:git&#37;&#52;&#48;github&#46;com">git<span>&#64;</span>github<span>&#46;</span>com</a>:mpcs51082-aut25/hw2-GITHUB-USERNAME.git.</p></li>
+<li><p>For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: <a class="reference external" href="mailto:git&#37;&#52;&#48;github&#46;com">git<span>&#64;</span>github<span>&#46;</span>com</a>:mpcs51082-win26/hw2-GITHUB-USERNAME.git.</p></li>
 <li><p>If you do not know how to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> to clone your repository then follow this guide that Github provides: <a class="reference external" href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository">Cloning a Repository</a></p></li>
 </ul>
 </dd>
@@ -349,6 +349,8 @@ $ bash ../../b.sh words.txt
 <ul class="simple">
 <li><p>Treat the extension as the text after the final dot in the filename (e.g., <code class="docutils literal notranslate"><span class="pre">archive.tar.gz</span></code> → <code class="docutils literal notranslate"><span class="pre">gz</span></code>).</p></li>
 <li><p>Ignore files without any dot in their basename (no extension).</p></li>
+<li><p>Make sure to use <code class="docutils literal notranslate"><span class="pre">LC_ALL=C</span></code> sort before the final sort. This ensures sorting is done in the C (POSIX) locale, which provides consistent and predictable ordering (e.g., Z sorts before a, and accented characters are sorted by byte value).</p></li>
+<li><p><strong>Spacing matters in Problem 1C</strong> — consider using <code class="docutils literal notranslate"><span class="pre">tr</span></code> and <code class="docutils literal notranslate"><span class="pre">xargs</span> <span class="pre">-L1</span></code> to help match the expected output format.</p></li>
 </ul>
 <p><strong>Hint (``rev``) command:</strong></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">rev</span></code> command reverses each input line. It’s handy for “last-dot” extraction. <em>You may use this command just for this problem.</em></p>

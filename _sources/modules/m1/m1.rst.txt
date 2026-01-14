@@ -27,10 +27,9 @@ You can also find the videos under the "Panopto" tab on the MPCS 51082 canvas si
 
 Week 2 Videos 
 ~~~~~~~~~~~~~~
-* 1.1 - Text Processing
-* 1.2 - Shell Scripting 
-* 1.3 - Demo: Shell-Scripting & Street Cleaning  
- 
+* 1.4 - Process Substitution, Globbing Syntax
+* 1.5 - Parameter Expansion 
+* 1.6 - Syntax Functions, Arrays, Dictionaries
 
 The slides presented in lecture and these videos are accessible on our Canvas Page. Click on the Files link and you then can download the m1.zip file.
 
@@ -68,4 +67,4 @@ Assignment
 Assignments are always **due** on Wednesday evenings. 
 
 *  `Homework #1  <../../assignments/hw1/index.html>`__, due January 14th at 11:59pm CDT
-*  `Homework #2  <../../assignments/hwww2/index.html>`__, due January 21st at 11:59pm CDT
+*  `Homework #2  <../../assignments/hw2/index.html>`__, due January 21st at 11:59pm CDT
