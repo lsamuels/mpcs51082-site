@@ -2,7 +2,7 @@
 Homework #2 
 =============
 
-**Due: Friday January 21st at 11:59pm**
+**Due: Wednesday January 21st at 11:59pm**
 
 This homework is intended to provide additional practice with writing Bash scripts. Specifically, using more advanced bash syntax and filtering (i.e., text processing) commands to process text.
 
