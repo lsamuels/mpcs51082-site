@@ -13,7 +13,7 @@ Pre-recorded Lectures
 ---------------------
 **Note: Professor Samuels will state on Ed when the prerecorded videos are ready to be viewed each week for a module.**
 
-The pre-recorded lectures are available here: `M1 Videos https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=aea92d17-f047-4f07-b6a2-b3cb01627208>`_.
+The pre-recorded lectures are available here: `M1 Videos <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=aea92d17-f047-4f07-b6a2-b3cb01627208>`_.
 
 Week 1 Videos 
 ~~~~~~~~~~~~~~
@@ -30,9 +30,9 @@ Week 2 Videos
 
 Week 3 Videos 
 ~~~~~~~~~~~~~~
-* 1.8 - Shell Aliasing & History
-* 1.9 - Shell Environment and Configuration
-* 1.10 - Shell Configuration Demo
+* 1.7 - Shell Aliasing & History
+* 1.8 - Shell Environment and Configuration
+* 1.9 - Shell Configuration Demo
 
 The slides presented in lecture and these videos are accessible on our Canvas Page. Click on the Files link and you then can download the m1.zip file.
 
@@ -68,7 +68,7 @@ Week 2
 Week 3 
 ~~~~~~~
 - Dates/Times
-   -  Section 1: **Monday October 20th 5:30pm-7:30pm** 
+   -  Section 1: **Monday January 20th 5:30pm-7:30pm** 
 - Session Outline 
    - Using regular expressions to find search/modify text in Unix 
    - Midterm discussion 
@@ -80,3 +80,4 @@ Assignments are always **due** on Wednesday evenings.
 
 *  `Homework #1  <../../assignments/hw1/index.html>`__, due January 14th at 11:59pm CDT
 *  `Homework #2  <../../assignments/hw2/index.html>`__, due January 21st at 11:59pm CDT
+*  `Homework #3  <../../assignments/hw3/index.html>`__, due January 28th at 11:59pm CDT

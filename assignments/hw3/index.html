@@ -99,19 +99,9 @@
 <li><a class="reference internal" href="#logging-structure">Logging Structure</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#task-1-counting-users-processes">Task 1: Counting Users Processes</a><ul>
+<li><a class="reference internal" href="#task-counting-users-processes">Task: Counting Users Processes</a><ul>
 <li><a class="reference internal" href="#options">Options</a></li>
 <li><a class="reference internal" href="#assumptions-hints">Assumptions/Hints</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#task-2-live-reload-manual-termination">Task 2: Live Reload (Manual Termination)</a><ul>
-<li><a class="reference internal" href="#script-termination">Script Termination</a></li>
-<li><a class="reference internal" href="#assumptions">Assumptions</a></li>
-<li><a class="reference internal" href="#helper-dir-timestamp-function">Helper: <code class="docutils literal notranslate"><span class="pre">dir_timestamp</span></code> function</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#polling-loop-template">Polling loop template</a></li>
-<li><a class="reference internal" href="#sample-runs">Sample Runs</a><ul>
 <li><a class="reference internal" href="#test-cases">Test cases</a></li>
 <li><a class="reference internal" href="#grading">Grading</a></li>
 <li><a class="reference internal" href="#submission">Submission</a></li>
@@ -131,7 +121,7 @@
       
   <section id="homework-3">
 <h1>Homework #3<a class="headerlink" href="#homework-3" title="Link to this heading">¶</a></h1>
-<p><strong>Due: Friday October 31st at 11:59pm</strong></p>
+<p><strong>Due: Wednesday January 28th at 11:59pm</strong></p>
 <p>This homework is intended to give practice filtering out information from the process status command.</p>
 <section id="cs-linux-machine">
 <h2>CS Linux Machine<a class="headerlink" href="#cs-linux-machine" title="Link to this heading">¶</a></h2>
@@ -179,7 +169,7 @@ GitHub account. If you do not yet have one, you can get an account here: <a clas
 <section id="programming-problem">
 <h2>Programming Problem<a class="headerlink" href="#programming-problem" title="Link to this heading">¶</a></h2>
 <p><strong>Note: For this assignment, you are not allowed to use the ``awk`` command. Many of you are over using this command to solve problems that can be done with simple Unix commands.</strong> However, you are allowed to use any other unix commands (except for <code class="docutils literal notranslate"><span class="pre">awk</span></code>) for this assignment, regardless if it was or was not discussed in class.</p>
-<p>For this problem, you will be writing a script that filters out information coming from the <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">aux</span></code> command (discussed in the lectures). One sample output from running this command is the following</p>
+<p>For this problem, you will be writing a script that filters out information coming from the <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">aux</span></code> command (which shows the running programs for all users logged into that specific machine). One sample output from running this command is the following</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">USER     PID     %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span>
 <span class="go">lamonts  3058393  0.0  0.0  19416  9468 ?        Ss   06:51   0:00 /lib/systemd/systemd --user</span>
 <span class="go">lamonts  3058396  0.0  0.0 202588  7632 ?        S    06:51   0:00 vim test.c</span>
@@ -192,6 +182,7 @@ GitHub account. If you do not yet have one, you can get an account here: <a clas
 <span class="go">sallyf+  3292196  0.0  0.0    392     0 pts/2661 TN   May10   0:00 head -1</span>
 </pre></div>
 </div>
+<p>Each line excluding the header line, represnts one running program that the user specified in the <code class="docutils literal notranslate"><span class="pre">USER</span></code> column.</p>
 <section id="logging-structure">
 <h3>Logging Structure<a class="headerlink" href="#logging-structure" title="Link to this heading">¶</a></h3>
 <p>Your task for this assignment is to implement a bash script inside the <code class="docutils literal notranslate"><span class="pre">p1/p1.sh</span></code> file that by default displays the top 10 users with the most processes inside file(s) that contain <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">aux</span></code> output. The output will be a log entry in a <code class="docutils literal notranslate"><span class="pre">log.csv</span></code> file. The script will also produce additional warning entries in the <code class="docutils literal notranslate"><span class="pre">log.csv</span></code> file. The structure of the log file is as follows:</p>
@@ -207,14 +198,18 @@ GitHub account. If you do not yet have one, you can get an account here: <a clas
 <p>We will discuss the <strong>Log Level</strong>, <strong>Status</strong>, and <strong>Message</strong> columns in further details in the next section.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">p1/p1.sh</span></code> takes in a single argument that represents a directory. For example, <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">./p1.sh</span> <span class="pre">./data</span></code>. The argument <code class="docutils literal notranslate"><span class="pre">./data</span></code> is that <code class="docutils literal notranslate"><span class="pre">data</span></code> directory located in your <code class="docutils literal notranslate"><span class="pre">p1</span></code> directory in your repository. The script creates and writes to a file named <code class="docutils literal notranslate"><span class="pre">log.csv</span></code> that must be created (if it does not already exist) inside the directory specified by command line argument. For example, if the script was ran as such <code class="docutils literal notranslate"><span class="pre">./p1.sh</span> <span class="pre">./data</span></code> then the script will create the a log file located under <code class="docutils literal notranslate"><span class="pre">p1/data/log.csv</span></code>. <strong>If the log file already exists then the script will always append to the end of the log file</strong>. If a new log file is created then the above header must always be the first line in the file.</p>
 <p>When the script begins to run, then the first entry must always be the following:</p>
-<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>2024-10-19 11:10:34,WARN,[START],Script starting...
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>2024-10-19 11:10:33,WARN,[START],Script starting...
+</pre></div>
+</div>
+<p>Before the script exits,the log file must include the below <code class="docutils literal notranslate"><span class="pre">WARN</span></code> line:</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>2024-10-19 11:11:00,WARN,[END],Script exiting...
 </pre></div>
 </div>
 <p><strong>Note</strong>: The <code class="docutils literal notranslate"><span class="pre">timestamp</span></code> will be different based on when you run the script; however, everything else within the line must be exactly as shown above.</p>
 </section>
 </section>
-<section id="task-1-counting-users-processes">
-<h2>Task 1: Counting Users Processes<a class="headerlink" href="#task-1-counting-users-processes" title="Link to this heading">¶</a></h2>
+<section id="task-counting-users-processes">
+<h2>Task: Counting Users Processes<a class="headerlink" href="#task-counting-users-processes" title="Link to this heading">¶</a></h2>
 <p>Your script must iterate through the provided directory and for each file inside the directory, it will create a single <code class="docutils literal notranslate"><span class="pre">INFO</span></code> log entry that represents the top 10 users with the most processes. For example,</p>
 <p>Inside the <code class="docutils literal notranslate"><span class="pre">p1/data/data00</span></code> file, it contains</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">USER     PID     %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span>
@@ -241,11 +236,20 @@ GitHub account. If you do not yet have one, you can get an account here: <a clas
 </div>
 <p>will create it a <code class="docutils literal notranslate"><span class="pre">data/log.csv</span></code> (if only does not already exist) with two entries as such:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data00],&quot;lamonts 3,maxg 3,sallyf+ 2,root 1&quot;</span>
-<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
+<span class="go">2024-10-19 11:10:35,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
 </pre></div>
 </div>
 <p>For each entry, the first column contains the timestamp (<strong>Note</strong>: This will be different based on when you are running your script!). The second column will always be equal to <code class="docutils literal notranslate"><span class="pre">INFO</span></code>. The third column will always be structured as <code class="docutils literal notranslate"><span class="pre">[FILE=%s]</span></code>, where <code class="docutils literal notranslate"><span class="pre">%s</span></code> represents the file currently being processed. and the last column is structured <code class="docutils literal notranslate"><span class="pre">USER</span> <span class="pre">TOTAL_PROCESSES</span></code> where the <strong>Message</strong> output is sorted by <code class="docutils literal notranslate"><span class="pre">TOTAL_PROCESSES</span></code> in descending order. If a <code class="docutils literal notranslate"><span class="pre">USER</span></code> is tied with another <code class="docutils literal notranslate"><span class="pre">USER</span></code> then sort them by username lexicographically. Each user is separated by a single comma. <strong>The entire message string is embedded within double quotes</strong>. Do not include the <code class="docutils literal notranslate"><span class="pre">log.csv</span></code> file as an entry. If a file does produces an empty string (i.e., no list of users) then do not include a log entry for that file.</p>
-<p><strong>IMPORTANT</strong>: The script file does not exit after processing the files inside of the directory. Instead, after processing all the files, it will spin in an infinite loop sleeping for 1 second (<code class="docutils literal notranslate"><span class="pre">sleep</span> <span class="pre">1</span></code>) each iteration. The user running the script must terminate the script by either entering <code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code> or using <code class="docutils literal notranslate"><span class="pre">kill</span></code> to terminate the program.</p>
+<p>After processing all files the script exits.</p>
+<p>In totality, after running <code class="docutils literal notranslate"><span class="pre">./p1.sh</span> <span class="pre">data</span></code>, the <code class="docutils literal notranslate"><span class="pre">data/log.csv1</span></code> file will look like this:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Timestamp,LogLevel,Status,Message</span>
+<span class="go">2024-10-19 11:10:33,WARN,[START],Script starting...</span>
+<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data00],&quot;lamonts 3,maxg 3,sallyf+ 2,root 1&quot;</span>
+<span class="go">2024-10-19 11:10:35,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
+<span class="go">2024-10-19 11:11:00,WARN,[END],Script exiting...</span>
+</pre></div>
+</div>
+<p>Again please ignore the timestamps here since they will be different when you run it.</p>
 <section id="options">
 <h3>Options<a class="headerlink" href="#options" title="Link to this heading">¶</a></h3>
 <p>The script will have the following command line options that will change the output of script as follows:</p>
@@ -266,165 +270,9 @@ GitHub account. If you do not yet have one, you can get an account here: <a clas
 <li><p>You can assume that we will test this giving you the correct format for an option. This means you will never see something like <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">lamont</span></code>. However, the options can come in any order and multiple can be supplied on the same command line. If given a file as input then you can assume the file will always be the last argument to <code class="docutils literal notranslate"><span class="pre">p1.sh</span></code>.</p></li>
 </ol>
 </section>
-</section>
-<section id="task-2-live-reload-manual-termination">
-<h2>Task 2: Live Reload (Manual Termination)<a class="headerlink" href="#task-2-live-reload-manual-termination" title="Link to this heading">¶</a></h2>
-<p>After your script finishes processing <strong>all files</strong> in the directory the first time (Task 1), it <strong>must not exit</strong>. Instead, it should:</p>
-<ol class="arabic">
-<li><p>Record the current “directory timestamp” (defined as the <em>maximum</em> modification time among regular files in the directory, top-level only).</p></li>
-<li><dl>
-<dt>Enter an infinite loop that:</dt><dd><ul class="simple">
-<li><p>Sleeps for 1 second (<code class="docutils literal notranslate"><span class="pre">sleep</span> <span class="pre">1</span></code>).</p></li>
-<li><p>Recomputes the directory timestamp and compares it with the previously recorded value.</p></li>
-<li><p>If the timestamp <strong>increased</strong> (i.e., at least one file changed), append the warning entry</p></li>
-</ul>
-<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>%s,WARN,[RELOAD],Script reloading...
-</pre></div>
-</div>
-<p>where <a href="#id1"><span class="problematic" id="id2">``</span></a>%s``presents the current timestamp. Then <strong>re-process the directory</strong> exactly as in Task 1, update your “last seen” timestamp, and continue looping.</p>
-</dd>
-</dl>
-<ul class="simple">
-<li><p>If <strong>no</strong> file changes are detected, continue looping (do nothing that iteration).</p></li>
-</ul>
-</li>
-</ol>
-<section id="script-termination">
-<h3>Script Termination<a class="headerlink" href="#script-termination" title="Link to this heading">¶</a></h3>
-<p>The script <strong>does not</strong> exit on its own. It must be terminated by the user (<code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code>) or via a <code class="docutils literal notranslate"><span class="pre">kill</span></code> command.</p>
-</section>
-<section id="assumptions">
-<h3>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>The “directory timestamp” is the <strong>maximum</strong> <code class="docutils literal notranslate"><span class="pre">mtime</span></code> (epoch seconds) among <strong>regular files in the top level</strong> of the directory (no recursion).</p></li>
-<li><p>If the directory contains <strong>no</strong> regular files, treat the directory timestamp as <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
-</ul>
-</section>
-<section id="helper-dir-timestamp-function">
-<h3>Helper: <code class="docutils literal notranslate"><span class="pre">dir_timestamp</span></code> function<a class="headerlink" href="#helper-dir-timestamp-function" title="Link to this heading">¶</a></h3>
-<p>Use this function to compute the directory timestamp. It supports Linux (GNU <code class="docutils literal notranslate"><span class="pre">stat</span></code>) and macOS/BSD (<code class="docutils literal notranslate"><span class="pre">stat</span> <span class="pre">-f</span></code>) and only scans the <strong>top level</strong> of the directory.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prints the max mtime (epoch seconds) among regular files directly in DIR,</span>
-<span class="c1"># excluding the log file. Prints 0 if no files remain. Exits non-zero on error.</span>
-dir_timestamp<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;usage: dir_timestamp DIR&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
-
-<span class="w">  </span><span class="c1"># Determine the log file&#39;s basename to exclude (default: log.csv)</span>
-<span class="w">  </span><span class="nb">local</span><span class="w"> </span>log_base
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">LOG_FILE</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">log_base</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">LOG_FILE</span><span class="p">##*/</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="k">else</span>
-<span class="w">    </span><span class="nv">log_base</span><span class="o">=</span><span class="s2">&quot;log.csv&quot;</span>
-<span class="w">  </span><span class="k">fi</span>
-
-<span class="w">  </span><span class="k">if</span><span class="w"> </span>stat<span class="w"> </span>--version<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="c1"># GNU/Linux</span>
-<span class="w">    </span><span class="nb">local</span><span class="w"> </span>max
-<span class="w">    </span><span class="nv">max</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>
-<span class="w">      </span>find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>!<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$log_base</span><span class="s2">&quot;</span><span class="w"> </span>-exec<span class="w"> </span>stat<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;%Y&#39;</span><span class="w"> </span>--<span class="w"> </span><span class="o">{}</span><span class="w"> </span>+<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<span class="w">      </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-n<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-1
-<span class="w">    </span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">max</span><span class="k">:-</span><span class="nv">0</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="k">else</span>
-<span class="w">    </span><span class="c1"># macOS / BSD</span>
-<span class="w">    </span><span class="nb">local</span><span class="w"> </span>max
-<span class="w">    </span><span class="nv">max</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>
-<span class="w">      </span>find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>!<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$log_base</span><span class="s2">&quot;</span><span class="w"> </span>-exec<span class="w"> </span>stat<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;%m&#39;</span><span class="w"> </span><span class="o">{}</span><span class="w"> </span>+<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<span class="w">      </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-n<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-1
-<span class="w">    </span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">max</span><span class="k">:-</span><span class="nv">0</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="k">fi</span>
-<span class="o">}</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="polling-loop-template">
-<h2>Polling loop template<a class="headerlink" href="#polling-loop-template" title="Link to this heading">¶</a></h2>
-<p>After the first full processing pass (Task 1), add the following loop. Replace the
-<code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">REPROCESS</span> <span class="pre">FILES</span> <span class="pre">HERE</span></code> section with your Task 1 logic (count users, emit <code class="docutils literal notranslate"><span class="pre">INFO</span></code> rows per file, etc.).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capture initial directory timestamp right after the first full processing.</span>
-<span class="nv">last_ts</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>dir_timestamp<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
-
-<span class="k">while</span><span class="w"> </span>:<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span>sleep<span class="w"> </span><span class="m">1</span>
-<span class="w">  </span><span class="nv">now_ts</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>dir_timestamp<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
-
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span>now_ts<span class="w"> </span>&gt;<span class="w"> </span>last_ts<span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="c1"># Change detected → log reload warning, re-run Task 1 processing.</span>
-
-<span class="w">    </span><span class="c1"># REPROCESS FILES HERE (your Task 1 logic that appends INFO lines per file)</span>
-<span class="w">    </span><span class="c1"># ------------------------------------------------------------------------</span>
-<span class="w">    </span><span class="nv">last_ts</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$now_ts</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="k">fi</span>
-<span class="k">done</span>
-</pre></div>
-</div>
-<p>You may use the polling template and <code class="docutils literal notranslate"><span class="pre">dir_timestamp</span></code> code in your solution.</p>
-</section>
-<section id="sample-runs">
-<h2>Sample Runs<a class="headerlink" href="#sample-runs" title="Link to this heading">¶</a></h2>
-<p>If you were to run the following <code class="docutils literal notranslate"><span class="pre">p1.sh</span></code> script with the provided data directory as such</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./p1.sh<span class="w"> </span>./data<span class="w"> </span><span class="p">&amp;</span>
-</pre></div>
-</div>
-<p>then your <code class="docutils literal notranslate"><span class="pre">./data/log.csv</span></code> will contain the following after processing the files</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Timestamp,LogLevel,Status,Message</span>
-<span class="go">2024-10-19 11:10:34,WARN,[START], Script starting...</span>
-<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data00],&quot;lamonts 3,maxg 3,sallyf+ 2,root 1&quot;</span>
-<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
-</pre></div>
-</div>
-<p>If we were to bring the script’s process into the fg and then terminate it with <code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code> as such</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">fg</span>
-<span class="go">^C</span>
-</pre></div>
-</div>
-<p>then your <code class="docutils literal notranslate"><span class="pre">./data/log.csv</span></code> will still contain the following</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Timestamp,LogLevel,Status,Message</span>
-<span class="go">2024-10-19 11:10:34,WARN,[START], Script starting...</span>
-<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data00],&quot;lamonts 3,maxg 3,sallyf+ 2,root 1&quot;</span>
-<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
-</pre></div>
-</div>
-<p>If we were to start the program again using the same <code class="docutils literal notranslate"><span class="pre">data</span></code> directory as such</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./p1.sh<span class="w"> </span>./data<span class="w"> </span><span class="p">&amp;</span>
-</pre></div>
-</div>
-<p>then your <code class="docutils literal notranslate"><span class="pre">./data/log.csv</span></code> will contain the following after processing the files</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Timestamp,LogLevel,Status,Message</span>
-<span class="go">2024-10-19 11:10:34,WARN,[START], Script starting...</span>
-<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data00],&quot;lamonts 3,maxg 3,sallyf+ 2,root 1&quot;</span>
-<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
-<span class="go">2024-10-19 11:12:25,WARN,[START], Script starting...</span>
-<span class="go">2024-10-19 11:13:25,INFO,[FILE=data/data00],&quot;lamonts 3,maxg 3,sallyf+ 2,root 1&quot;</span>
-<span class="go">2024-10-19 11:14:00,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
-</pre></div>
-</div>
-<p>The entries append on to the log file since the <code class="docutils literal notranslate"><span class="pre">./data/log.csv</span></code> already exists.</p>
-<p>To verify your live-reload loop works, do the following inside the <code class="docutils literal notranslate"><span class="pre">./data</span></code> directory:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>touch<span class="w"> </span>./data/data00
-</pre></div>
-</div>
-<p>We are use to using <code class="docutils literal notranslate"><span class="pre">touch</span></code> command to create empty files; however, if the file already exists then <a href="#id3"><span class="problematic" id="id4">``</span></a>touch``updates the modification time of that file (without changing its contents) to time when the command was run.</p>
-<p>Within about one second, your script should detect the change and append a reload warning to
-<code class="docutils literal notranslate"><span class="pre">./data/log.csv</span></code>, followed by a fresh set of <code class="docutils literal notranslate"><span class="pre">INFO</span></code> entries for each file it reprocessed. Now the <code class="docutils literal notranslate"><span class="pre">./data/log.csv</span></code> will look like the following:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Timestamp,LogLevel,Status,Message</span>
-<span class="go">2024-10-19 11:10:34,WARN,[START], Script starting...</span>
-<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data00],&quot;lamonts 3,maxg 3,sallyf+ 2,root 1&quot;</span>
-<span class="go">2024-10-19 11:10:34,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
-<span class="go">2024-10-19 11:12:25,WARN,[START], Script starting...</span>
-<span class="go">2024-10-19 11:13:25,INFO,[FILE=data/data00],&quot;lamonts 3,maxg 3,sallyf+ 2,root 1&quot;</span>
-<span class="go">2024-10-19 11:14:00,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
-<span class="go">2024-10-19 11:10:34,WARN,[RELOAD],Script reloading...</span>
-<span class="go">2024-10-19 11:13:25,INFO,[FILE=data/data00],&quot;lamonts 3,maxg 3,sallyf+ 2,root 1&quot;</span>
-<span class="go">2024-10-19 11:14:00,INFO,[FILE=data/data01],&quot;lamonts 1&quot;</span>
-</pre></div>
-</div>
-<p><strong>Note</strong>:Many filesystems update <code class="docutils literal notranslate"><span class="pre">mtime</span></code> with <strong>1-second granularity</strong>. With a <code class="docutils literal notranslate"><span class="pre">sleep</span> <span class="pre">1</span></code> loop, your reload may appear on the next iteration.</p>
 <section id="test-cases">
 <h3>Test cases<a class="headerlink" href="#test-cases" title="Link to this heading">¶</a></h3>
-<p>As always, Professor Samuels will provide testcases on Monday of Week 5 to help test your code.</p>
+<p>As always, Professor Samuels will provide testcases on Saturday of Week 3 to help test your code. We want you to learn how to test your own code first for this specific assignment. This means you should create you own data files. Try running <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">aux</span></code> on the servers and copying over a portion of the output for various users to ensure the log file is generating the correct counts.</p>
 </section>
 <section id="grading">
 <h3>Grading<a class="headerlink" href="#grading" title="Link to this heading">¶</a></h3>

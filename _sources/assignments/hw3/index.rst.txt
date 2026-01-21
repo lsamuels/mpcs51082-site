@@ -2,7 +2,7 @@
 Homework #3
 ==========================================
 
-**Due: Friday October 31st at 11:59pm**
+**Due: Wednesday January 28th at 11:59pm**
 
 This homework is intended to give practice filtering out information from the process status command. 
 
@@ -56,7 +56,7 @@ Programming Problem
 ~~~~~~~~~~~~~~~~~~~~
 **Note: For this assignment, you are not allowed to use the ``awk`` command. Many of you are over using this command to solve problems that can be done with simple Unix commands.** However, you are allowed to use any other unix commands (except for ``awk``) for this assignment, regardless if it was or was not discussed in class. 
 
-For this problem, you will be writing a script that filters out information coming from the ``ps aux`` command (discussed in the lectures). One sample output from running this command is the following 
+For this problem, you will be writing a script that filters out information coming from the ``ps aux`` command (which shows the running programs for all users logged into that specific machine). One sample output from running this command is the following 
 
 .. code-block:: console 
 
@@ -71,6 +71,7 @@ For this problem, you will be writing a script that filters out information comi
   sallyf+  3292195  0.0  0.0    544     0 pts/2661 TN   May10   0:00 grep -o -E [0-9]+
   sallyf+  3292196  0.0  0.0    392     0 pts/2661 TN   May10   0:00 head -1
 
+Each line excluding the header line, represnts one running program that the user specified in the ``USER`` column. 
 
 Logging Structure 
 ------------------------
@@ -94,12 +95,18 @@ When the script begins to run, then the first entry must always be the following
 
 .. code-block:: csv 
 
-  2024-10-19 11:10:34,WARN,[START],Script starting...
+  2024-10-19 11:10:33,WARN,[START],Script starting...
 
+
+Before the script exits,the log file must include the below ``WARN`` line: 
+
+.. code-block:: csv 
+
+  2024-10-19 11:11:00,WARN,[END],Script exiting...
 
 **Note**: The ``timestamp`` will be different based on when you run the script; however, everything else within the line must be exactly as shown above.  
 
-Task 1: Counting Users Processes  
+Task: Counting Users Processes  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Your script must iterate through the provided directory and for each file inside the directory, it will create a single ``INFO`` log entry that represents the top 10 users with the most processes. For example, 
 
@@ -137,11 +144,25 @@ will create it a ``data/log.csv`` (if only does not already exist) with two entr
 .. code-block:: console 
 
   2024-10-19 11:10:34,INFO,[FILE=data/data00],"lamonts 3,maxg 3,sallyf+ 2,root 1"
-  2024-10-19 11:10:34,INFO,[FILE=data/data01],"lamonts 1"
+  2024-10-19 11:10:35,INFO,[FILE=data/data01],"lamonts 1"
 
 For each entry, the first column contains the timestamp (**Note**: This will be different based on when you are running your script!). The second column will always be equal to ``INFO``. The third column will always be structured as ``[FILE=%s]``, where ``%s`` represents the file currently being processed. and the last column is structured ``USER TOTAL_PROCESSES`` where the **Message** output is sorted by ``TOTAL_PROCESSES`` in descending order. If a ``USER`` is tied with another ``USER`` then sort them by username lexicographically. Each user is separated by a single comma. **The entire message string is embedded within double quotes**. Do not include the ``log.csv`` file as an entry. If a file does produces an empty string (i.e., no list of users) then do not include a log entry for that file. 
 
-**IMPORTANT**: The script file does not exit after processing the files inside of the directory. Instead, after processing all the files, it will spin in an infinite loop sleeping for 1 second (``sleep 1``) each iteration. The user running the script must terminate the script by either entering ``CTRL+C`` or using ``kill`` to terminate the program. 
+After processing all files the script exits. 
+
+In totality, after running ``./p1.sh data``, the ``data/log.csv1`` file will look like this: 
+
+
+.. code-block:: console 
+  
+  Timestamp,LogLevel,Status,Message
+  2024-10-19 11:10:33,WARN,[START],Script starting...
+  2024-10-19 11:10:34,INFO,[FILE=data/data00],"lamonts 3,maxg 3,sallyf+ 2,root 1"
+  2024-10-19 11:10:35,INFO,[FILE=data/data01],"lamonts 1"
+  2024-10-19 11:11:00,WARN,[END],Script exiting...
+
+Again please ignore the timestamps here since they will be different when you run it. 
+
 
 Options 
 --------
@@ -165,182 +186,9 @@ Assumptions/Hints
 
 7. You can assume that we will test this giving you the correct format for an option. This means you will never see something like ``-n lamont``. However, the options can come in any order and multiple can be supplied on the same command line. If given a file as input then you can assume the file will always be the last argument to ``p1.sh``. 
 
-Task 2: Live Reload (Manual Termination)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-After your script finishes processing **all files** in the directory the first time (Task 1), it **must not exit**. Instead, it should:
-
-1. Record the current “directory timestamp” (defined as the *maximum* modification time among regular files in the directory, top-level only).
-2. Enter an infinite loop that:
-    - Sleeps for 1 second (``sleep 1``).
-    - Recomputes the directory timestamp and compares it with the previously recorded value.
-    - If the timestamp **increased** (i.e., at least one file changed), append the warning entry
-
-    .. code-block:: csv
-
-        %s,WARN,[RELOAD],Script reloading...
-
-    where ``%s``presents the current timestamp. Then **re-process the directory** exactly as in Task 1, update your “last seen” timestamp, and continue looping.
-   - If **no** file changes are detected, continue looping (do nothing that iteration).
-
-Script Termination
-------------------
-
-The script **does not** exit on its own. It must be terminated by the user (``CTRL+C``) or via a ``kill`` command.
-
-Assumptions
--------------
-- The “directory timestamp” is the **maximum** ``mtime`` (epoch seconds) among **regular files in the top level** of the directory (no recursion).
-- If the directory contains **no** regular files, treat the directory timestamp as ``0``.
-
-Helper: ``dir_timestamp`` function 
-------------------------------------
-Use this function to compute the directory timestamp. It supports Linux (GNU ``stat``) and macOS/BSD (``stat -f``) and only scans the **top level** of the directory.
-
-.. code-block:: bash
-
-  # Prints the max mtime (epoch seconds) among regular files directly in DIR,
-  # excluding the log file. Prints 0 if no files remain. Exits non-zero on error.
-  dir_timestamp() {
-    local dir="${1:-}"
-    [[ -n "$dir" && -d "$dir" ]] || { echo "usage: dir_timestamp DIR" >&2; return 2; }
-
-    # Determine the log file's basename to exclude (default: log.csv)
-    local log_base
-    if [[ -n "${LOG_FILE:-}" ]]; then
-      log_base="${LOG_FILE##*/}"
-    else
-      log_base="log.csv"
-    fi
-
-    if stat --version >/dev/null 2>&1; then
-      # GNU/Linux
-      local max
-      max="$(
-        find "$dir" -maxdepth 1 -type f ! -name "$log_base" -exec stat -c '%Y' -- {} + 2>/dev/null \
-        | sort -n | tail -1
-      )"
-      echo "${max:-0}"
-    else
-      # macOS / BSD
-      local max
-      max="$(
-        find "$dir" -maxdepth 1 -type f ! -name "$log_base" -exec stat -f '%m' {} + 2>/dev/null \
-        | sort -n | tail -1
-      )"
-      echo "${max:-0}"
-    fi
-  }
-
-
-Polling loop template 
-~~~~~~~~~~~~~~~~~~~~~~
-After the first full processing pass (Task 1), add the following loop. Replace the
-``# REPROCESS FILES HERE`` section with your Task 1 logic (count users, emit ``INFO`` rows per file, etc.).
-
-.. code-block:: bash
-
-   # Capture initial directory timestamp right after the first full processing.
-   last_ts="$(dir_timestamp "$DATA_DIR")"
-
-   while :; do
-     sleep 1
-     now_ts="$(dir_timestamp "$DATA_DIR")"
-
-     if (( now_ts > last_ts )); then
-       # Change detected → log reload warning, re-run Task 1 processing.
-
-       # REPROCESS FILES HERE (your Task 1 logic that appends INFO lines per file)
-       # ------------------------------------------------------------------------
-       last_ts="$now_ts"
-     fi
-   done
-
-You may use the polling template and ``dir_timestamp`` code in your solution. 
-
-Sample Runs
-~~~~~~~~~~~~~
-If you were to run the following ``p1.sh`` script with the provided data directory as such 
-
-.. code-block:: console 
-
-  $ ./p1.sh ./data &
-
-then your ``./data/log.csv`` will contain the following after processing the files 
-
-.. code-block:: console 
-
-  Timestamp,LogLevel,Status,Message
-  2024-10-19 11:10:34,WARN,[START], Script starting...
-  2024-10-19 11:10:34,INFO,[FILE=data/data00],"lamonts 3,maxg 3,sallyf+ 2,root 1"
-  2024-10-19 11:10:34,INFO,[FILE=data/data01],"lamonts 1"
-
-If we were to bring the script's process into the fg and then terminate it with ``CTRL+C`` as such 
-
-.. code-block:: console 
-
-  $ fg 
-  ^C 
-
-then your ``./data/log.csv`` will still contain the following
-
-.. code-block:: console 
-
-  Timestamp,LogLevel,Status,Message
-  2024-10-19 11:10:34,WARN,[START], Script starting...
-  2024-10-19 11:10:34,INFO,[FILE=data/data00],"lamonts 3,maxg 3,sallyf+ 2,root 1"
-  2024-10-19 11:10:34,INFO,[FILE=data/data01],"lamonts 1"
-
-If we were to start the program again using the same ``data`` directory as such 
-
-.. code-block:: console 
-
-  $ ./p1.sh ./data &
-
-then your ``./data/log.csv`` will contain the following after processing the files 
-
-.. code-block:: console 
-
-  Timestamp,LogLevel,Status,Message
-  2024-10-19 11:10:34,WARN,[START], Script starting...
-  2024-10-19 11:10:34,INFO,[FILE=data/data00],"lamonts 3,maxg 3,sallyf+ 2,root 1"
-  2024-10-19 11:10:34,INFO,[FILE=data/data01],"lamonts 1"
-  2024-10-19 11:12:25,WARN,[START], Script starting...
-  2024-10-19 11:13:25,INFO,[FILE=data/data00],"lamonts 3,maxg 3,sallyf+ 2,root 1"
-  2024-10-19 11:14:00,INFO,[FILE=data/data01],"lamonts 1"
-
-The entries append on to the log file since the ``./data/log.csv`` already exists. 
-
-To verify your live-reload loop works, do the following inside the ``./data`` directory: 
-
-.. code-block:: console
-
-    $ touch ./data/data00
-
-We are use to using ``touch`` command to create empty files; however, if the file already exists then ``touch``updates the modification time of that file (without changing its contents) to time when the command was run. 
-
-Within about one second, your script should detect the change and append a reload warning to
-``./data/log.csv``, followed by a fresh set of ``INFO`` entries for each file it reprocessed. Now the ``./data/log.csv`` will look like the following: 
-
-.. code-block:: console
-
-  Timestamp,LogLevel,Status,Message
-  2024-10-19 11:10:34,WARN,[START], Script starting...
-  2024-10-19 11:10:34,INFO,[FILE=data/data00],"lamonts 3,maxg 3,sallyf+ 2,root 1"
-  2024-10-19 11:10:34,INFO,[FILE=data/data01],"lamonts 1"
-  2024-10-19 11:12:25,WARN,[START], Script starting...
-  2024-10-19 11:13:25,INFO,[FILE=data/data00],"lamonts 3,maxg 3,sallyf+ 2,root 1"
-  2024-10-19 11:14:00,INFO,[FILE=data/data01],"lamonts 1"
-  2024-10-19 11:10:34,WARN,[RELOAD],Script reloading...
-  2024-10-19 11:13:25,INFO,[FILE=data/data00],"lamonts 3,maxg 3,sallyf+ 2,root 1"
-  2024-10-19 11:14:00,INFO,[FILE=data/data01],"lamonts 1"
-
-**Note**:Many filesystems update ``mtime`` with **1-second granularity**. With a ``sleep 1`` loop, your reload may appear on the next iteration.
-
-
 Test cases 
 -------------
-As always, Professor Samuels will provide testcases on Monday of Week 5 to help test your code. 
+As always, Professor Samuels will provide testcases on Saturday of Week 3 to help test your code. We want you to learn how to test your own code first for this specific assignment. This means you should create you own data files. Try running ``ps aux`` on the servers and copying over a portion of the output for various users to ensure the log file is generating the correct counts.
 
 Grading
 -------
