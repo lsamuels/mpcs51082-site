@@ -22,17 +22,8 @@ The lectures are a series of approx 15-20 minute videos. **Please come back here
 
 Week 4 Videos 
 ~~~~~~~~~~~~~~~
-* 2.0 - Introduction to Processes 
-* 2.1 - Job Control 
-* 2.2 - Process Groups and Sessions 
+* 2.1 - Process Groups and Sessions
 
-Week 5 Video 
-~~~~~~~~~~~~~
-`C Bootcamp Videos <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=0de23cde-9be3-4ef0-8a30-b387017d06c3>`_.
--  C Basics(Part 1)
--  C Basics(Part 2)
--  C Basics(Part 3)
--  C Basics(Part 4)
 
 The slides presented in these videos are accessible in the upstream repository and on Canvas.
 
@@ -50,17 +41,17 @@ As a reminder here are the dates and times for the synchronous session for this 
 
 Week 4 
 ~~~~~~~
-Midterm Exam (no in-person lecture)
+- Dates/Times
+   -  Section 1: **Monday January 27th 5:30pm-7:30pm** 
+- Session Outline 
+   - Introduction to Processes 
+   - Job Control 
+   - Signals 
+   - Process Groups and Sessions [if time permits]
 
-
-Week 5
-~~~~~~~
-- Signals 
-- Process Management [if time permit]
 
 Assignment
 ----------------------
 Assignments are always **due** on Friday evenings. 
 
-* `Homework #3 <../../assignments/hw3/index.html>`__, due October 31st at 11:59pm CDT
-* `Homework #4 <../../assignments/hw4/index.html>`__, due November 7th at 11:59pm CDT
+* `Homework #3 <../../assignments/hw3/index.html>`__, due January 28th at 11:59pm CDT
