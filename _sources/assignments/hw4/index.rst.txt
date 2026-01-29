@@ -2,10 +2,10 @@
 Homework #4
 ==========================================
 
-**Due: Tuesday, November 7th at 11:59pm**
+**Due: Wednesday, February 4th at 11:59pm**
 
-This homework is intended to server as an introduction to C programming language. This assignment is not meant to cover everything in the C language. 
-It solely serves as a way for you to get familiar with working with C, and continue learning about shell scripting.
+This homework provides pratcice with job control and signals and is intended to server as an introduction to C programming language. This assignment is not meant to cover everything in the C language. 
+It solely serves as a way for you to get familiar with working with C basics. 
 
 
 CS Linux Machine
@@ -46,7 +46,7 @@ When you click on an invitation URL, you will have to complete the following ste
 4. You now need to clone your repository (i.e., download it to your machine). 
     - Make sure you’ve set up `SSH access <https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh>`__ on your GitHub account.
     
-    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51082-win25/hw4-GITHUB-USERNAME.git. 
+    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51082-win26/hw4-GITHUB-USERNAME.git. 
 
     - If you do not know how to use ``git clone`` to clone your repository then follow this guide that Github provides: `Cloning a Repository <https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository>`__
     
@@ -55,7 +55,9 @@ If you run into any issues, or need us to make any manual adjustments to your re
 
 Problem 1
 ==============
-For this problem you will update your homework 3 solution to include signal handling for reloading and print a message when the script exits. To start copy over your solution ``p1/p1.sh`` from your homework 3 repository into your ``p1/p1.sh`` file inside your homework 4 repository and remove my ``dir_timestamp()`` function and update the polling code to the following: 
+For this problem you will update your homework 3 solution to include signal handling for reloading and print a message when the script exits. To start copy over your solution ``p1/p1.sh`` from your homework 3 repository into your ``p1/p1.sh`` file inside your homework 4 repository and update your script such that it does not exit after processing the files. 
+
+Instead, after your script finishes processing all files in the directory the first time, it **must not exit**. Instead, it should poll by sleeping for a second:
 
 .. code-block:: bash
 
@@ -64,7 +66,10 @@ For this problem you will update your homework 3 solution to include signal hand
      sleep 1
    done
 
-Update your solution (if necessary)to ensure files inside log file appear in Lexicographical order. For example, if the following files: ``data001.in``, ``data002.in``, and ``data003.in``are inside the directory given to the script then ensure the info line for ``data001.in`` appears first followed by  ``data002.in`` and lastly   ``data003.in``. 
+
+The script **does not** exit on its own. It must be terminated by the user (``CTRL+C``) or via a ``kill`` command.
+
+Update your solution (if necessary) to ensure files inside log file appear in Lexicographical order. For example, if the following files: ``data001.in``, ``data002.in``, and ``data003.in``are inside the directory given to the script then ensure the info line for ``data001.in`` appears first followed by  ``data002.in`` and lastly   ``data003.in``. 
 
 
 Task : Signal Handling 
@@ -75,7 +80,7 @@ Your script must also handle catching signals. Specifically, it must do the foll
 2. If the kernel sends a ``SIGCONT`` signal to the script then it must output the entry: ``%s,WARN,[RESUME],Script resuming...``, where ``%s`` is current timestamp. **Do not** process the directory of files again. 
 3. Catch a graceful exit using ``EXIT`` pseudo-signal and then prints the ``%s,WARN,[EXIT],Script exiting..."``, where ``%s`` is current timestamp. Do not reprocess the files. 
 
-Testcaes are already provided to for testing this implementation inside ``p1/tests``. You can run the tests  
+Testcases are already provided to for testing this implementation inside ``p1/tests``. You can run the tests  
 
 .. code-block:: console
 
@@ -84,145 +89,211 @@ Testcaes are already provided to for testing this implementation inside ``p1/tes
    $ bash run.sh  
 
 
-Problem 2
-==========
-This problem is intended to help you get prepared for starting your shell application in the next assignment. Specifically, you will implement functions that parse command lines and retrieve information about them (e.g., the total number of arguments). For example, 
+Problem 2: Word Count 
+=====================
+In this problem, you will write a simple Unix-style program in C that reads
+input from **standard input** and counts the number of lines, words, and
+characters it receives.
 
-.. code-block:: console  
+This program is inspired by the Unix ``wc`` (word count) utility that we have discussed and used, but you will implement a simplified version from scratch.
 
-  $ ls -la ~/mpcs51082-aut24 
+Your task is to write a program called ``p2/p2.c``.
 
-The command line is ``ls -la ~/mpcs51082-aut24 ``, where the command is ``ls`` and has two arguments: ``-la``, and ``~/mpcs51082-aut24`` . 
+Program Behavior
+----------------
 
+Your program must:
 
-The stubs for the functions you are already inside ``p2/parse.c``. The ``p2/parse.c`` already contains a main function with test cases to test the functions you will implement. You only need to implement the required functions. You can comment out (e.g.,``//``) test-cases such that only the ones you want to test currently run.  
+- Read input from standard input until end-of-file (EOF)
+- Count:
+   - Number of lines
+   - Number of words
+   - Number of characters
+- Support an optional leading control sequence read from standard input
+  that determines what is printed
 
-Implement the ``compute_num_args`` function 
---------------------------------------------
-Copy the following function documentation above the definition inside ``parse.c``: 
+Your program should compile without warnings using:
+::
 
-.. code-block:: c 
-  
-  /*
-  * compute_num_args - computes the number of arguments in the provided command line string 
-  * 
-  * line: a string that represents text from a shell's command line 
-  * 
-  * Assumptions: You can assume the line does not contain more than a single command (i.e., we do not have "&&" or "||" or ";" in the line string). 
-  * 
-  * Returns: the total number of arguments for the command including the command name
-  */
-  int compute_num_args(const char *line); 
-
-This function counts the total number of arguments including the program name. For example, if ``line ="ls -la ~/mpcs51082-aut24 "`` then ``compute_num_args`` will return ``3``.  For this function, you 
-can assume there will not be multiple commands executed on a single line (e.g., ``ls ; echo -e hw & cd ..`` will never be given). Here are few test-cases to try 
-
-.. code-block:: c 
-  
-  printf("%d\n",compute_num_args("ls -la ~/mpcs51082-aut24 "));  // prints 3
-  printf("%d\n",compute_num_args("cd ..")); // prints 2 
-  printf("%d\n",compute_num_args("ls")); // prints 1 
+   gcc -Wall -Wextra -o p2 p2.c
 
 
-**hint**: Look up the ``str_tok`` function in the string library. 
+Make sure you are inside your ``p2`` directory when compiling the program. 
+
+Input Control Sequence
+----------------------
+
+If the first two characters read from standard input are one of the
+following:
+
+- ``-l`` : print only the number of lines
+- ``-w`` : print only the number of words
+- ``-c`` : print only the number of characters
+
+then your program must change its output behavior accordingly.
+
+If no such control sequence is present, your program should print all three
+counts.
+
+Important Counting Rule
+-----------------------
+
+If a control sequence (``-l``, ``-w``, or ``-c``) is present at the beginning of
+the input:
+
+- The characters ``'-'`` and the letter following it **must not be counted**
+- Counting begins **after** the control sequence
+- Only the remaining input contributes to the line, word, and character counts
+- You can assume if a control sequence that it is a valid sequence specified above. For example, we will not give you ``-a``. 
 
 
-Implement tht ``find_arg`` function 
+Output Format
+-------------
+
+If **no control sequence** is present, print **exactly**:
+
+::
+
+  <num>, <num>, <num>
+
+where the first <num> is lines, followed by words, and chars counts. 
+
+If a control sequence **is present**, print **only** the requested count:
+
+- ``-l`` lines count output:
+
+::
+
+  <num>
+
+- ``-w`` word count output:
+
+::
+
+    <num>
+
+- ``-c`` chars count output:
+
+::
+
+    <num>
+
+No additional output should be printed.
+
+
+Definitions
+-----------
+
+- A **character** is any byte read from standard input, including whitespace.
+- A **line** is any sequence of characters terminated by a newline character
+  (``'\n'``).
+- A **word** is a sequence of one or more non-whitespace characters separated by
+  spaces, tabs, or newlines.
+
+Whitespace characters include:
+- Space (``' '``)
+- Tab (``'\t'``)
+- Newline (``'\n'``)
+
+
+
+Example Usage
+-------------
+Inside your ``p2`` directory contains a file ``input.txt`` that contains the following text: 
+
+:: 
+
+  Hello world
+  This is a simple test file.
+  It has multiple   spaces.
+
+  And even a blank line.
+
+
+
+Then the Default behavior (no control sequence):
+
+::
+
+   $ ./problem2 < input.txt
+   5,17,90
+
+Print only words:
+
+::
+
+   $ echo "-w hello world" | ./p2
+    2
+
+Print only characters:
+
+::
+
+   $ printf -e "-cHello\nWorld\n" | ./p2
+   12
+
+---
+
+Using ``getchar()``
+-------------------
+
+You must use the C standard library function ``getchar()`` to read input.
+
+``getchar()``:
+
+- Reads one character at a time from standard input
+- Returns the character read as an ``char``
+- Returns ``EOF`` when no more input is available
+
+A typical usage pattern looks like this:
+
+::
+
+   char c;
+   while ((c = getchar()) != EOF) {
+       /* process character c */
+   }
+
+This allows your program to work correctly with pipes and input redirection.
+
+
+
+Detecting Whitespace with ``isspace()``
 --------------------------------------
 
-Copy the following function documentation above the definition inside ``parse.c``: 
+To determine whether a character is whitespace, use the function ``isspace()``
+from ``<ctype.h>``.
 
-.. code-block:: c 
-  
- /*
- * find_arg - finds the argument at a specific index from within the command line string
- * 
- * line: a string that represents text from a shell's command line 
- *
- * index: the index of the argument that is being requested. 
- *
- * argument: the string to copy the requested argument into. 
- * 
- * Assumptions: O-indexing is assumed. The parameter ("argument") is big enough to hold its value. 
- *              You can assume the line does not contain more than a single command (i.e., we do not have "&" or ";" in the line string). 
- * Returns: the following error codes based on execution: 
- *      0 - success. Was able to find the argument as the specified index 
- *      1 - failure. Index was not valid (i.e., not within the range of 0 to maximum number of arguments in the line)
- */
- int find_arg(const char *line, const int index, char *argument);
+``isspace()``:
+
+- Returns non-zero if the character is whitespace
+- Returns zero otherwise
+
+Example usage:
+
+::
+
+   if (isspace(c)) {
+       /* c is whitespace */
+   }
+
+You may use ``isspace()`` to help determine word boundaries.
 
 
-This function finds a specific argument on the command line and copies the argument into the ``argument`` parameter. For example, if ``line ="ls -la ~/mpcs51082-aut24 "`` then ``find_arg`` at ``index=0`` will copy ``ls`` and will return ``0`` to indicate
-it was able to find the argument. Otherwise, if ``find_arg`` is given an invalid index (i.e., outside the bounds of the ``line`` arguments) then the function returns ``1``. For this function, you 
-can assume there will not be multiple commands executed on a single line (e..g, ``ls ; echo -e hw & cd ..`` will never be given). Also you can assume ``argument`` will always be big enough to hold the argument being copied. Here are few test-cases to try 
+Constraints
+-----------
 
-.. code-block:: c 
-  
-    char argument[10]; 
-    printf("%d\n",find_arg("ls -la ~/mpcs51082-aut24 ",0,argument)); // prints 0 
-    printf("%s\n", argument); // prints ls
-    printf("%d\n",find_arg("ls -la ~/mpcs51082-aut24 ",1,argument)); // prints 0
-    printf("%s\n", argument); // prints -la 
-    printf("%d\n",find_arg("ls -la ~/mpcs51082-aut24 ",10,argument)); // prints 1 
+Your solution must adhere to the following constraints:
+
+- Use ``getchar()`` to read input
+- Use ``isspace()`` to detect whitespace
+- No use of ``scanf``, ``fgets``, or ``getline``
 
 
-``parse_lines`` function 
-----------------------------
-Copy the following function documentation above the definition inside ``parse.c``: 
-
-.. code-block:: c 
-  
-  /*
-  * parse_lines - Counts the total number of background and foreground jobs in the array of lines provided. 
-  *
-  * lines: an array of strings that contain strings representing command line strings 
-  * 
-  * lines_len: the length of the lines array. 
-  *
-  * Assumption: You can assume that the command line strings will only contain "&" and ";" characters to run multiple commands on a single line. 
-  * 
-  * Returns: a shellinfo_t with the total counts of the the number of background and foreground jobs. 
-  */
-  shellinfo_t parse_lines(const char*lines[], const int lines_len); 
-
-This function determines the total number foreground and background jobs across all command lines within the array of strings. This function uses the ``shellinfo_t`` type to return the total number of foreground and background jobs. For example, if given the following
-
-.. code-block:: c 
-
-  const char *lines2[2] = {"ls -la ~/mpcs51082-aut24 & cd ..; ls", 
-                     "echo -e \"Hello\""};
-  results = parse_lines(lines2,2); 
-  printf("fg=%d, bg=%d\n",results.fg, results.bg);
-
-This will return ``fg=3, bg=1`` because: 
-
-1. ``ls -la ~/mpcs51082-aut24 `` is background jobs since ``&`` follows the command. 
-2. ``cd ..`` is a foreground job since it ends in a ``;``. 
-3. ``ls`` is the last command on the line and it is a foreground job since it does not end in a ``&``
-4. ``echo -e \"Hello\"`` is a foreground job. 
-
-You can assume for this problem the lines will only contain ``;`` or ``&``  to represent running multiple commands on a single line. Here are few test-cases to try 
-
-.. code-block:: c 
-  
-    shellinfo_t results; 
-    const char *lines1[1] = {"ls -la ~/mpcs51082-aut24 & cd .. "};
-    results = parse_lines(lines1,1); 
-    printf("fg=%d, bg=%d\n",results.fg, results.bg); //prints fg=1,bg=1
-
-    const char *lines2[2] = {"ls -la ~/mpcs51082-aut24 & cd .. ", 
-                        "echo -e \"Hello\";ls;ls;cat file.txt > out.txt &"};
-    results = parse_lines(lines2,2); 
-    printf("fg=%d, bg=%d\n",results.fg, results.bg); // prints fg=4,bg=2
 
 
-    const char *lines3[3] = {"ls -la ~/mpcs51082-aut24 & cd .. ; ./crawler &", 
-                       "echo -e \"Hello\";ls;ls;cat file.txt > out.txt &", 
-                       "cd .."}; 
-    results = parse_lines(lines3,3); 
-    printf("fg=%d, bg=%d\n",results.fg, results.bg); // prints fg=5,bg=3
 
-To help you understand how to work with an array of strings, I have given you a sample program  ``p2/vowels.c`` that counts the total number of vowels inside an array of strings. Look at and compile/execute this program before you start implementing: ``parse_lines``. 
+
 
 Grading
 =========

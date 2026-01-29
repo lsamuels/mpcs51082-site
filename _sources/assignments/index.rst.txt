@@ -8,6 +8,7 @@ Homework
 - `Homework #1 <./hw1/index.html>`__, due January 14th at 11:59pm CDT
 - `Homework #2 <./hw2/index.html>`__, due January 21st at 11:59pm CDT
 - `Homework #3 <./hw3/index.html>`__, due January 28th at 11:59pm CDT
+- `Homework #4 <./hw4/index.html>`__, due February 4th at 11:59pm CDT
 
 Project 
 =======
