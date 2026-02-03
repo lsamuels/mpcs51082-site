@@ -53,6 +53,14 @@ Week 4
    - Signals 
    - Process Groups and Sessions
 
+Week 5 
+~~~~~~~
+- Dates/Times
+   -  Section 1: **Tuesday February 3rd 5:30pm-7:30pm** 
+- Session Outline 
+   - Memory Hierarchy 
+   - Process Management
+
 
 Assignment
 ----------------------
