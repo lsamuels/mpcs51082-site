@@ -29,6 +29,15 @@ C Bootcammp Outline
 - C Basics (Part 2)
 
 
+Week 5 Videos
+~~~~~~~~~~~~~~~~
+`C Bootcamp Videos <https://uchicago.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=bf1ed42e-14b2-4286-8cd5-b3e100073623>`_
+- Advanced C (Part 1)
+- Advanced C (Part 2)
+- Advanced C (Part 3)
+- Advanced C (Part 4)
+- Advanced C (Part 5)
+
 The slides presented in these videos are accessible in the upstream repository and on Canvas.
 
 Resources/Readings 
@@ -67,4 +76,5 @@ Assignment
 Assignments are always **due** on Friday evenings. 
 
 * `Homework #3 <../../assignments/hw3/index.html>`__, due January 28th at 11:59pm CDT
-* `Homework #4 <../../assignments/hw4/index.html>`__, due February 4th at 11:59pm CDT
+* `Homework #4 <../../assignments/hw4/index.html>`__, due February 4th at 11:59pm *
+* `Homework #5 <../../assignments/hw5/index.html>`__, due February 11th at 11:59pm CDT
