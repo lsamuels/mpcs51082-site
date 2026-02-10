@@ -54,7 +54,7 @@ When you click on an invitation URL, you will have to complete the following ste
 If you run into any issues, or need us to make any manual adjustments to your registration, please let us know via Ed Discussion.
 
 
-Problem 1
+Problem 
 ==========
 You will implement functions that parse command lines and retrieve information about them (e.g., the total number of arguments). For example, 
 
