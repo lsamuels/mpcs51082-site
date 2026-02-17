@@ -44,9 +44,16 @@ Week 6
    - System calls process
    - Process Creation and Termination in C 
 
+Week 7 
+~~~~~~~
+- Dates/Times
+   -  Section 1: **Monday February 17th 5:30pm-07:30pm** 
+- Session Outline 
+   - Discuss Final Exam 
+   - Introductions to Signals in C 
 
 Assignment
 ----------------------
-Assignments are always **due** on Friday evenings. 
+Assignments are always **due** on Wednesday evenings. 
 
 * `Homework #6 <../../assignments/hw6/index.html>`__, due February 18th at 11:59pm CDT

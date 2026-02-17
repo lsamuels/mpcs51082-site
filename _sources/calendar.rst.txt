@@ -19,7 +19,7 @@ In general, assignments are posted on Tuesday preceding their deadline.
     4, M2: Unix Processes & Management, HW 4,  HW 3
     5, M2: Unix Processes & Management, HW 5, HW 4   
     6, M3: Interacting with the Unix Kernel, HW 6, HW 5  
-    7, M4: Unix File Systems & Networking in Unix, Milestone 1, HW 6
-    8, **Quarter Exam** and M5: Inter-Process Communication, Milestone 2, None 
-    9, M6: Advance Kernel Subsystems, None, Milestone 1   
-    10, (Finals Week), None, Milestone 2 
+    7, M3: Interacting with the Unix Kernel, Project, HW 6
+    8, **Quarter Exam** and  M4: Advance Kernel Subsystems, None, None 
+    9, M4: Advance Kernel Subsystems, None, None
+    10, (Finals Week), None, Project

@@ -19,9 +19,7 @@ The course material will be split into six modules that will span 1-2 weeks thro
 - M1: The Unix Shell (Week 1-2): Learn how to interact with Unix through the command line, mastering essential commands, syntax, and scripting basics.
 - M2: Unix Processes and Management(Week 3 - 4): Look at the internal structures of programs and processes in Unix and how they are managed. 
 - M3: Interacting with the Unix Kernel(Week 5-6): Explore how user programs communicate with the kernel through system calls and how the kernel manages resources. 
-- M4: Unix File Systems and Networking in Unix (Week 7): Study how Unix organizes files and directories, with emphasis on permissions, links, and the virtual file system.Gain practical experience with network tools and commands, learning how Unix systems communicate over local and remote connections.
-- M5: Inter-Process Communication (Week 8): Understand how processes communication with each other. 
-- M6: Advanced Kernel Subsystems (Week 9): Examine advanced features such as memory management, device drivers. 
+- M4: Advanced Kernel Subsystems (Week 9): Examine advanced features such as memory management, file systems, networking, device drivers. 
 The delivery of the course content will follow a flipped classroom model, where lecture material and course content will be provided in two ways:
 
 - **Synchronous content** (*i.e., in-person*): Each week during our normal class time, we will meet in person at the time and location designated above. The synchronous sessions will include:
@@ -92,11 +90,9 @@ Your final grade will be based on the following:
 +----------------------------------------------+-----+
 | Homework 1-6 (5% each)                       | 30% |
 +----------------------------------------------+-----+
-| Milestone 1                                  | 10% |
+| Project                                      | 25% |
 +----------------------------------------------+-----+
-| Milestone 2                                  | 30% |
-+----------------------------------------------+-----+
-| Quarter Exam                                 | 35% |
+| Quarter Exam                                 | 40% |
 +----------------------------------------------+-----+
 | Attendance                                   | 5%  |
 +----------------------------------------------+-----+
