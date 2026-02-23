@@ -2,9 +2,9 @@
 Milestone #2
 ==========================================
 
-**Due: Friday, Decemeber 12th at 11:59pm**
+**Due:  Tuesday March 10th at 11:59pm**
 
-**No extensions can be used for this final milestone!** 
+**No extensions can be used for this milestone** 
 
 In this assignment, we will wrap up our shell implementation by implementing signals to handle job control and a few built-in shell commands.   
 
@@ -301,7 +301,7 @@ Hints & Tips
 
 Testing 
 ========
-We provide test code for testing the ``history`` feature of the shell inside. You can find these testcases in the upstream repository ``hw-tests/milestone2``. Place this directory in the ``tests`` directory of your msh repository. These tests are almost the same as the milestone 1 tests but they also contain background processes. The history tests can be found in ``hw-tests/test_history.c``. Please note We cannot provide other test cases easily for the remaining features (i.e., builtin commands).  We will have to test this by hand since the new features require user interaction. 
+We provide test code for testing the ``history`` feature of the shell inside. You can find these testcases in your repository under ``tests/milestone2``. These tests are almost the same as the milestone 1 tests but they also contain background processes. The history tests can be found in ``tests/test_history.c``. Please note We cannot provide other test cases easily for the remaining features (i.e., builtin commands).  We will have to test this by hand since the new features require user interaction. 
 
 
 Grading
@@ -316,7 +316,7 @@ The exact weights for each category will vary from one assignment to another. Fo
 
 Submission
 ===========
-Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Milestone #2" assignment page by linking your Github account to your Gradescope account and upload the correct repository based on the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
+Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Project" assignment page by linking your Github account to your Gradescope account and upload the correct repository based on the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
   
 Depending on the assignment, once you submit your work, an "autograder" will run. This autograder should produce the same test results as when you run the code yourself; if it doesn't, please let us know so we can look into it. A few other notes: 
 

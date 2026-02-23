@@ -2,7 +2,10 @@
 Milestone #1
 ==========================================
 
-**Due:  Wednesday December 3rd at 11:59pm**
+**Due:  Tuesday March 10th at 11:59pm**
+
+**No extensions can be used for this milestone** 
+
 
 In this assignment, we will begin implementing the course project: a shell program. This assignment focuses on understanding the repository structure and getting the initial parsing of the shell commands correct.  
 
@@ -26,7 +29,7 @@ GitHub account. If you do not yet have one, you can get an account here: https:/
 
 To actually get your private repository, you will need this invitation URL: 
 
-* **Project invitation (Please check the Post Project (Milestone #1) is ready” Ed)**
+* **Project invitation (Please check the Post Project is ready” Ed)**
 
 When you click on an invitation URL, you will have to complete the following steps:
 
@@ -44,7 +47,7 @@ When you click on an invitation URL, you will have to complete the following ste
 4. You now need to clone your repository (i.e., download it to your machine). 
     - Make sure you’ve set up `SSH access <https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh>`__ on your GitHub account.
     
-    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51082-aut25/msh-GITHUB-USERNAME.git. 
+    - For each repository, you will need to get the SSH URL of the repository. To get this URL, log into GitHub and navigate to your project repository (take into account that you will have a different repository per project). Then, click on the green “Code” button, and make sure the “SSH” tab is selected. Your repository URL should look something like this: git@github.com:mpcs51082-win26/msh-GITHUB-USERNAME.git. 
 
     - If you do not know how to use ``git clone`` to clone your repository then follow this guide that Github provides: `Cloning a Repository <https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository>`__
     
@@ -497,24 +500,6 @@ You can test the running of the ``msh`` program by running the tests inside ``te
 
 Please let Professor Samuels know if there is any issues running these tests on Ed. 
 
-Grading
-~~~~~~~~
-Programming assignments will be graded according to a general rubric. Specifically, we will assign points for completeness, correctness, design, and style. (For more details on the categories, see our Assignment Rubric page.)
-
-The exact weights for each category will vary from one assignment to another. For this assignment, the weights will be:
-
-- **Completeness**: 70%
-- **Correctness**: 20%
-- **Design/Style**: 10% 
-
 Submission
 ~~~~~~~~~~~~
-
-Before submitting, make sure you've added, committed, and pushed all your code to GitHub. You must submit your final work through Gradescope (linked from our Canvas site) in the "Milestone #1" assignment page by linking your Github account to your Gradescope account and upload the correct repository based on the homework assignment. When you submit your homework, a pop window will appear. Click on "Github" and then  "Connect to Github" to connect your Github account to Gradescope. Once you connect (you will only need to do this once), then you can select the repository you wish to upload and the branch (which should always be "main" or "master") for this course.  
-  
-Depending on the assignment, once you submit your work, an "autograder" will run. This autograder should produce the same test results as when you run the code yourself; if it doesn't, please let us know so we can look into it. A few other notes: 
-
-- You are allowed to make as many submissions as you want before the deadline.
-- Please make sure you have read and understood our :ref:`Late Submission Policy <late_submissions>`. 
-- Your completeness score is determined solely based on the automated tests, but we may adjust your score if you attempt to pass tests by rote (e.g., by writing code that hard-codes the expected output for each possible test input).
-- Gradescope will report the test score it obtains when running your code. If there is a discrepancy between the score you get when running our grader script, and the score reported by Gradescope, please let us know so we can take a look at it.
+You will turn in the final solution to the project after completing milestone 2. Once you have verified your milestone 1 implementation is working please just move on to Milestone 2 specification. 
