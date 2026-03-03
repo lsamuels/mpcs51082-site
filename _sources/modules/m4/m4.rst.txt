@@ -27,10 +27,6 @@ Week 8
 - 4.1: Unix I/O Functions 
 - 4.2: Standard I/O Functions 
 
-Wee 9 
-~~~~~
-- 4.3: File Systems 
-- 4.4: Networking in Unix 
 
 The slides presented in these videos are accessible in the upstream repository.
 
@@ -39,7 +35,7 @@ Resources/Readings
 
 * The slides and code presented in this module are accessible in the upstream repository.
 * **The Linux Programming Interface: A Linux and UNIX System Programming Handbook readings:**
-   - Chapter 4.1-4.6
+   - Chapter 4.1-4.6op
    - Chapter 5.4 - 5.5
    - Chapter 20.1 - 20.8
 
@@ -50,16 +46,14 @@ As a reminder here are the dates and times for the synchronous session for this 
 Week 8 
 ~~~~~~~
 - Dates/Times
-   - **Monday November 17th 10:30am-12:20pm** 
-   - **Thursday November 20th 5:30pm-7:30pm** 
+   - **Tuesday February 24th 5:30pm-7:30pm** 
 - Session Outline 
    - Exam 
 
 Week 9 
 ~~~~~~~
 - Dates/Times
-   - **Monday December 1st 10:30am-12:20pm** 
-   - **Thursday November 4th 5:30pm-7:30pm** 
+   - **Tuesday March 3rd 05:30pm-7:30pm** 
 - Session Outline 
    - Virtual Memory 
    - Unix File systems  
@@ -67,5 +61,4 @@ Week 9
 
 Assignment
 ----------------------
-* `Milestone #1 <../../assignments/milestone1/index.html>`__, due December 3rd at 11:59pm CDT
-* `Milestone #2 <../../assignments/milestone2/index.html>`__, due December 13th at 11:59pm CDT
+* See Assignment Page 
